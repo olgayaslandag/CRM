@@ -10,7 +10,7 @@
     <div class="row justify-content-center no-gutters">
       <div class="col-lg-9 col-xl-8 col-xxl-6">
         <div class="card">
-          <div class="card-header bg-circle-shape text-center p-2"><a class="text-white text-sans-serif font-weight-extra-bold fs-4 z-index-1 position-relative" href="<?php echo base_url(); ?>">TORA</a></div>
+          <div class="card-header bg-circle-shapee bg-dark text-center p-2"><a class="text-white text-sans-serif font-weight-extra-bold fs-4 z-index-1 position-relative" href="<?php echo base_url(); ?>">TORA</a></div>
           <div class="card-body p-4">
             <?php if(session()->get("message")){ ?>
             <div class="bg-danger text-white p-2 mb-2">
@@ -61,7 +61,7 @@
                 <label class="custom-control-label" for="split-checkbox">Beni Hatırla</label>
               </div>
               <div class="form-group">
-                <button class="btn btn-primary btn-block mt-3" type="submit">Giriş Yap</button>
+                <button class="btn btn-secondary btn-block mt-3" type="submit">Giriş Yap</button>
               </div>
             <?php echo form_close(); ?>
           </div>
