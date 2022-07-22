@@ -124,6 +124,8 @@ $routes->group("/evrak", function($routes){
     $routes->post("gelen_ekle", "EvrakController::gelen_ekle");
     $routes->get("gelen_sil/(:num)", "EvrakController::gelen_sil/$1");
     $routes->get("gelen_detay/(:num)", "EvrakController::gelen_detay/$1");
+
+    $routes->get("giden", "EvrakController::gidenler");
 });
 
 
@@ -147,6 +149,7 @@ $routes->group("/yerlesim", function($routes){
 
 
 $routes->get("/ewc_kodlar", "AtikController::ewc_kodlar");
+$routes->post("/ewc_kodlar/import", "AtikController::ewc_import");
 
 $routes->get('/dashboard', 'DashboardController::index');
 /*

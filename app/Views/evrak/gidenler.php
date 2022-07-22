@@ -3,11 +3,11 @@
 <?php $this->section("content"); ?>
 <div class="card">
     <div class="card-body">
-        <h3 class="mb-0"><?php echo lang("Evrak.page_title"); ?></h3>
-        <p class="mt-2"><?php echo lang("Evrak.page_desc"); ?></p>
+        <h3 class="mb-0"><?php echo lang("Evrak_giden.page_title"); ?></h3>
+        <p class="mt-2"><?php echo lang("Evrak_giden.page_desc"); ?></p>
 
         <button class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#yeniEkle">
-            <?php echo lang("Evrak.new_button"); ?> 
+            <?php echo lang("Evrak_giden.new_button"); ?> 
             <span class="fas fa-chevron-right ml-1 fs--2"></span>
         </button>
 
@@ -19,12 +19,12 @@
                     "type" => "date",
                     "name" => "tarih",
                     "class"=> "form-control form-control-sm mb-2",
-                    "placeholder" => lang("Evrak.table_tarih")
+                    "placeholder" => lang("Evrak_giden.table_tarih")
                 ]); ?>
             </li>
             <li class="list-inline-item">
                 <select class="form-control form-control-sm mb-2" name="belge_tur">
-                    <option value=""><?php echo lang("Evrak.table_belgeTur"); ?></option>
+                    <option value=""><?php echo lang("Evrak_giden.table_belgeTur"); ?></option>
                     <?php foreach($evrakTurler as $tur){
                         echo "<option value='".$tur->id."'>".$tur->tanim."</option>";
                     }?>
@@ -35,7 +35,7 @@
                     "type" => "text",
                     "name" => "alici_firma",
                     "class"=> "form-control form-control-sm mb-2",
-                    "placeholder" => lang("Evrak.table_aliciFirma")
+                    "placeholder" => lang("Evrak_giden.table_aliciFirma")
                 ]); ?>
             </li>
             <li class="list-inline-item">
@@ -43,14 +43,14 @@
                     "type" => "text",
                     "name" => "ilgili_firma",
                     "class"=> "form-control form-control-sm mb-2",
-                    "placeholder" => lang("Evrak.table_ilgiliFirma")
+                    "placeholder" => lang("Evrak_giden.table_ilgiliFirma")
                 ]); ?>
             </li>
             <li class="list-inline-item">
                 <?php echo form_button([
                     "type" => "submit", 
                     "class" => "btn btn-primary btn-sm", 
-                    "content" => lang("Evrak.filter_button_text")
+                    "content" => lang("Evrak_giden.filter_button_text")
                 ]); ?>
             </li>
         </ul>
@@ -60,14 +60,14 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th><?php echo lang("Evrak.table_belgeNo"); ?></th>
-                        <th><?php echo lang("Evrak.table_tarih"); ?></th>
-                        <th><?php echo lang("Evrak.table_gonderenId"); ?></th>
-                        <th><?php echo lang("Evrak.table_aliciFirma"); ?></th>
-                        <th><?php echo lang("Evrak.table_belgeTur"); ?></th>
-                        <th><?php echo lang("Evrak.table_ilgiliFirma"); ?></th>
-                        <th><?php echo lang("Evrak.table_kargoFirma"); ?></th>
-                        <th><?php echo lang("Evrak.table_barkodNo"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_belgeNo"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_tarih"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_gonderenId"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_aliciFirma"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_belgeTur"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_ilgiliFirma"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_kargoFirma"); ?></th>
+                        <th><?php echo lang("Evrak_giden.table_barkodNo"); ?></th>
                         <th width="100"></th>
                     </tr>
                 </thead>
@@ -105,7 +105,7 @@
   <div class="modal-dialog modal-dialog-vertical" role="document">
     <div class="modal-content border-0 min-vh-100">
       <div class="modal-header">
-        <h5 class="modal-title" id="detay"><?php echo lang("Evrak.detail_title"); ?></h5>
+        <h5 class="modal-title" id="detay"><?php echo lang("Evrak_giden.detail_title"); ?></h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span class="font-weight-light" aria-hidden="true">&times;</span>
         </button>
@@ -121,7 +121,7 @@
   <div class="modal-dialog modal-dialog-vertical" role="document">
     <div class="modal-content border-0 min-vh-100">
       <div class="modal-header">
-        <h5 class="modal-title" id="yeniEkle"><?php echo lang("Evrak.new_form_title"); ?></h5>
+        <h5 class="modal-title" id="yeniEkle"><?php echo lang("Evrak_giden.new_form_title"); ?></h5>
         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span class="font-weight-light" aria-hidden="true">&times;</span>
         </button>
@@ -129,7 +129,7 @@
       <div class="modal-body py-5 text-center">
         <img class="img-fluid" src="<?php echo site_url('assets/img/illustrations/modal-right.png'); ?>" alt="">
         <?php 
-            echo form_open_multipart(base_url("evrak/gelen_ekle"), ["method" => "post", "autocomplete" => "off"]);
+            echo form_open_multipart(base_url("evrak/giden_ekle"), ["method" => "post", "autocomplete" => "off"]);
             echo form_input([
                 "type" => "hidden", 
                 "name" => "ekleyen_id", 
@@ -141,7 +141,7 @@
                 "name" => "belge_no",
                 "class" => "form-control mb-3",
                 "required" => true,
-                "placeholder" => lang("Evrak.table_belgeNo")
+                "placeholder" => lang("Evrak_giden.table_belgeNo")
             ]);
 
             echo form_input([
@@ -149,7 +149,7 @@
                 "name" => "tarih",
                 "class" => "form-control mb-3",
                 "required" => true,
-                "placeholder" => lang("Evrak.table_tarih")
+                "placeholder" => lang("Evrak_giden.table_tarih")
             ]);
 
             echo form_input([
@@ -157,7 +157,7 @@
                 "name" => "alici_firma",
                 "class" => "form-control mb-3",
                 "required" => true,
-                "placeholder" => lang("Evrak.table_aliciFirma")
+                "placeholder" => lang("Evrak_giden.table_aliciFirma")
             ]);
 
             echo form_input([
@@ -165,11 +165,11 @@
                 "name" => "alici_kisi",
                 "class" => "form-control mb-3",
                 "required" => true,
-                "placeholder" => lang("Evrak.table_aliciKisi")
+                "placeholder" => lang("Evrak_giden.table_aliciKisi")
             ]);
             ?>
             <select class="form-control mb-3" name="evrak_tur_id">
-                <option value=""><?php echo lang("Evrak.table_belgeTur"); ?></option>
+                <option value=""><?php echo lang("Evrak_giden.table_belgeTur"); ?></option>
                 <?php foreach($evrakTurler as $tur){
                     echo "<option value='".$tur->id."'>".$tur->tanim."</option>";
                 }?>
@@ -180,35 +180,21 @@
                 "name" => "ilgili_firma",
                 "class" => "form-control mb-3",
                 "required" => true,
-                "placeholder" => lang("Evrak.table_ilgiliFirma")
-            ]);
-
-            echo form_input([
-                "type" => "text",
-                "name" => "ilgili_firma2",
-                "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_ilgiliFirma2")
-            ]);
-
-            echo form_input([
-                "type" => "text",
-                "name" => "ilgili_firma3",
-                "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_ilgiliFirma3")
+                "placeholder" => lang("Evrak_giden.table_ilgiliFirma")
             ]);
 
             echo form_input([
                 "type" => "text",
                 "name" => "kargo_firma",
                 "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_kargoFirma")
+                "placeholder" => lang("Evrak_giden.table_kargoFirma")
             ]);
 
             echo form_input([
                 "type" => "text",
                 "name" => "barkod_no",
                 "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_barkodNo")
+                "placeholder" => lang("Evrak_giden.table_barkodNo")
             ]);
 
             echo form_input([
@@ -216,21 +202,21 @@
                 "name" => "konu",
                 "class" => "form-control mb-3",
                 "required" => true,
-                "placeholder" => lang("Evrak.table_konu")
+                "placeholder" => lang("Evrak_giden.table_konu")
             ]);
 
             echo form_input([
                 "type" => "text",
                 "name" => "arsiv_klasor_bilgi",
                 "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_arsivKlasorBilgi")
+                "placeholder" => lang("Evrak_giden.table_arsivKlasorBilgi")
             ]);
 
            
             echo form_button([
                 "type" => "submit", 
                 "class" => "btn btn-primary form-control", 
-                "content" => lang("Evrak.add_button")
+                "content" => lang("Evrak_giden.add_button")
             ]);
             echo form_close(); 
         ?>
@@ -246,7 +232,7 @@
 <script>
 $(function(){
     $(".sil").on("click", function(){
-        var kontrol = confirm("<?php echo lang('Evrak.confirm_text'); ?>");
+        var kontrol = confirm("<?php echo lang('Evrak_giden.confirm_text'); ?>");
         if(!kontrol){
             return false;
         }
@@ -265,51 +251,43 @@ $(function(){
           <div class="table-responsive">\
             <table class="table">\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_belgeNo"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_belgeNo"); ?></th>\
                     <td>'+data.belge_no+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_tarih"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_tarih"); ?></th>\
                     <td>'+data.tarih+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_gonderenId"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_gonderenId"); ?></th>\
                     <td>'+data.adsoyad+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_aliciFirma"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_aliciFirma"); ?></th>\
                     <td>'+data.alici_firma+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_aliciKisi"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_aliciKisi"); ?></th>\
                     <td>'+data.alici_kisi+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_belgeTur"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_belgeTur"); ?></th>\
                     <td>'+data.tanim+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_ilgiliFirma"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_ilgiliFirma"); ?></th>\
                     <td>'+data.ilgili_firma+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_ilgiliFirma2"); ?></th>\
-                    <td>'+data.ilgili_firma2+'</td>\
-                </tr>\
-                <tr>\
-                    <th><?php echo lang("Evrak.table_ilgiliFirma3"); ?></th>\
-                    <td>'+data.ilgili_firma3+'</td>\
-                </tr>\
-                <tr>\
-                    <th><?php echo lang("Evrak.table_kargoFirma"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_kargoFirma"); ?></th>\
                     <td>'+data.kargo_firma+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_barkodNo"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_barkodNo"); ?></th>\
                     <td>'+data.barkod_no+'</td>\
                 </tr>\
                 <tr>\
-                    <th><?php echo lang("Evrak.table_konu"); ?></th>\
+                    <th><?php echo lang("Evrak_giden.table_konu"); ?></th>\
                     <td>'+data.konu+'</td>\
                 </tr>\
             </table>\

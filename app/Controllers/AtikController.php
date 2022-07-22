@@ -239,4 +239,9 @@ class AtikController extends BaseController
 
     }
 
+    public function ewc_import()
+    {
+        echo json_encode($this->request->getPost());
+    }
+
 }

@@ -5,19 +5,25 @@
     <div class="card-body">
         <h3 class="mb-0"><?php echo lang("Ewc.page_title"); ?></h3>
         <p class="mt-2"><?php echo lang("Ewc.page_desc"); ?></p>
-        <button class="btn btn-white btn-sm mb-3" data-toggle="modal" data-target="#yeniEkle">
+        <button class="btn btn-secondary btn-sm mb-3" data-toggle="modal" data-target="#yeniEkle">
             <?php echo lang("Ewc.new_button"); ?> 
             <span class="fas fa-chevron-right ml-1 fs--2"></span>
         </button>
-        <button class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#yeniEkle">
-            <?php echo lang("Ewc.import_button"); ?> 
-            <span class="fas fa-chevron-right ml-1 fs--2"></span>
-        </button>
-        <button class="btn btn-success btn-sm mb-3" data-toggle="modal" data-target="#yeniEkle">
-            <?php echo lang("Ewc.export_button"); ?> 
-            <span class="fas fa-chevron-right ml-1 fs--2"></span>
-        </button>
+        <label for="import-file">
+            <span class="btn btn-primary btn-sm mb-3">
+                <?php echo lang("Ewc.import_button"); ?> 
+                <span class="fas fa-chevron-right ml-1 fs--2"></span>
+            </span>
+        </label>
+        <input type="file" name="import-file" id="import-file" class="d-none">
         
+        <label for="export-file">
+            <span class="btn btn-success btn-sm mb-3">
+                <?php echo lang("Ewc.export_button"); ?> 
+                <span class="fas fa-chevron-right ml-1 fs--2"></span>
+            </span>
+        </label>
+        <input type="file" name="export-file" id="export-file" class="d-none">
 
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -129,6 +135,26 @@ $(function(){
         if(!kontrol){
             return false;
         }
+    });
+
+    $("input[name=import-file]").on("change", function(){
+
+        var formData = new FormData();
+        formData.append('section', 'general');
+        formData.append('action', 'previewImg');
+        formData.append('file', $(this)[0].files[0]);
+
+        $.ajax({
+            url: '<?php echo site_url("ewc_kodlar/import"); ?>',
+            data: formData,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            success: function(r){
+                console.log(r);
+            }
+        });
+
     });
 });
 </script>

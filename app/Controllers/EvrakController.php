@@ -7,11 +7,13 @@ class EvrakController extends BaseController
 {
 
 	protected $GelenEvrakModel;
+	protected $GidenEvrakModel;
 
 	public function __construct()
 	{
 
 		$this->GelenEvrakModel = new \App\Models\Evrak\GelenEvrakModel;
+		$this->GidenEvrakModel = new \App\Models\Evrak\GidenEvrakModel;
 
 	}
 
@@ -107,5 +109,71 @@ class EvrakController extends BaseController
     	return $this->response->setJSON($data);
 
     }
+
+    public function gidenler()
+	{
+
+		$filter = (Object) $this->request->getGet();
+
+		foreach($filter as $k=>$v){
+			if($v == "" || !$v){
+				unset($filter->$k);
+			}else{
+				$filter->$k = inputRemoveTag($v);
+			}
+		}
+
+		$EvrakTurModel = new \App\Models\Evrak\EvrakTurModel();
+
+
+		$evraklar = $this->GidenEvrakModel->getAll($filter);
+		$turler = $EvrakTurModel->orderBy("tanim", "ASC")->findAll();
+
+		$data = [
+			"evraklar" => $evraklar,
+			"evrakTurler" => $turler,
+			"filter" => $filter
+		];
+		return view("evrak/gidenler", $data);
+
+	}
+
+	public function giden_ekle()
+	{
+
+		$validation = $this->validate([
+            "belge_no" => "required",
+            "tarih"  	=> "required",
+            "alici_firma" => "required",
+            "tur"  		=> "required",
+            "ilgili_firma" => "required",
+            "konu"  	=> "required",
+        ]);
+
+        if(!$validation){
+            session()->set(["status" => false, "message" => $this->validator->getErrors()]);
+    		return redirect()->back();
+        }
+
+
+
+		$entity = new \App\Entities\Evrak\GidenEvrakEntity;
+		$posts = $this->request->getPost();
+		foreach($posts as $k=>$v){
+			$posts[$k] = inputRemoveTag($v);
+			$entity->$k = $v;
+		}
+
+		if($this->GidenEvrakModel->save($entity)){
+			session()->set(["status" => true, "message" => lang("Evrak_giden.save_success")]);
+		} else {
+			session()->set(["status" => false, "message" => lang("Evrak_giden.save_error")]);
+		}
+
+		return redirect("/")->route("evrak/giden");
+
+	}
+
+	
 
 }
