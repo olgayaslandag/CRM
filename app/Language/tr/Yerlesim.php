@@ -18,7 +18,7 @@ return [
 	"table_vergi_no" => "Vergi No",
 	"table_il_id" => "İl",
 	"table_ilce_id" => "İlçe",
-
+	"table_yerlesim_tip" => "Yerleşim Tipi",
 
 	"form_add_success" => "Yerleşim sisteme başarıyla eklendi.",
 	"form_add_error" => "Yerleşim sisteme eklenirken hata oluştu!",

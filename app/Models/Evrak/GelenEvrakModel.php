@@ -34,12 +34,10 @@ class GelenEvrakModel extends Model
             gelen_evraklar.id as evrak_id,
             gelen_evraklar.belge_no,
             gelen_evraklar.tarih,
-            gelen_evraklar.alici_firma,
+            y_alici.unvan as alici_firma,
             gelen_evraklar.alici_kisi,
-            gelen_evraklar.ilgili_firma,
-            gelen_evraklar.ilgili_firma2,
-            gelen_evraklar.ilgili_firma3,
-            gelen_evraklar.kargo_firma,
+            y_ilgili.unvan as ilgili_firma,
+            y_kargo.unvan as kargo_firma,
             gelen_evraklar.konu,
             gelen_evraklar.barkod_no,
             gelen_evraklar.arsiv_klasor_bilgi,
@@ -49,6 +47,9 @@ class GelenEvrakModel extends Model
         ");
         $builder = $builder->join("evrak_tur", "evrak_tur.id=gelen_evraklar.evrak_tur_id");
         $builder = $builder->join("sys_kullanici", "sys_kullanici.id=gelen_evraklar.ekleyen_id");
+        $builder = $builder->join("yerlesimler as y_alici", "y_alici.id=gelen_evraklar.alici_firma");
+        $builder = $builder->join("yerlesimler as y_ilgili", "y_ilgili.id=gelen_evraklar.ilgili_firma");
+        $builder = $builder->join("yerlesimler as y_kargo", "y_kargo.id=gelen_evraklar.kargo_firma", "LEFT");
         
         if($this->tempUseSoftDeletes)
             $builder->where($this->table . '.' . $this->deletedField, null);

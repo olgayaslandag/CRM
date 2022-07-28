@@ -11,10 +11,13 @@ class YerlesimController extends BaseController
 	{
 
 		$YerlesimModel = new \App\Models\Yerlesim\YerlesimModel();
-		$yerlesimler = $YerlesimModel->findAll();
+		$YerlesimTipModel = new \App\Models\Yerlesim\YerlesimTipModel();
+		$yerlesimler = $YerlesimModel->getAll();
+		$yerlesimTipler = $YerlesimTipModel->findAll();
 
 		$data = [
-			"yerlesimler" => $yerlesimler
+			"yerlesimler" => $yerlesimler,
+			"yerlesim_tipleri" => $yerlesimTipler
 		];
 
 		return view("yerlesim/yerlesimler", $data);
@@ -75,6 +78,18 @@ class YerlesimController extends BaseController
 
         return redirect()->route("yerlesim");
 
+	}
+
+	public function find_select($type=null)
+	{
+		$YerlesimModel = new \App\Models\Yerlesim\YerlesimModel();
+		foreach($YerlesimModel->findAll() as $yerlesim){
+			$bilgi[] = [
+				"id" => $yerlesim->id,
+				"text" => $yerlesim->unvan
+			];
+		}
+		return $this->response->setJSON($bilgi);
 	}
 
 }

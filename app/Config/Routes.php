@@ -141,6 +141,7 @@ $routes->group("/yerlesim", function($routes){
     $routes->post("ekle", "YerlesimController::ekle");
     $routes->get("getir/(:num)", "YerlesimController::getir/$1");
     $routes->get("sil/(:num)", "YerlesimController::delete/$1");
+    $routes->get("find_select", "YerlesimController::find_select");
 });
 
 

@@ -16,8 +16,8 @@ return [
 	"table_belgeNo" => "Belge No",
 	"table_tarih" => "Tarih",
 	"table_gonderenId" => "Gönderen",
-	"table_aliciFirma" => "Alıcı",
-	"table_aliciKisi" => "Alıcı 2",
+	"table_aliciFirma" => "Alıcı Firma",
+	"table_aliciKisi" => "Alıcı Kişi",
 	"table_belgeTur" => "Belge Türü",
 	"table_ilgiliFirma" => "İlgili Firma",
 	"table_ilgiliFirma2" => "İlgili Firma 2",
@@ -27,8 +27,11 @@ return [
 	"table_konu" => "Konu",
 	"table_arsivKlasorBilgi" => "Arşiv/Klasör Bilgisi",
 
+	"select_file" => "Dosya Seçin",
+
 	"save_success" => "Evrak sisteme başarılı bir şekilde eklendi.",
  	"save_error" => "Evrak sisteme eklenemedi",
  	"remove_success" => "Evrak sistemden başarılı bir şekilde silindi.",
  	"remove_error" => "Evrak sistemden silinemedi!",
+ 	"upload_error" => "Dosya yüklenemedi!",
 ];

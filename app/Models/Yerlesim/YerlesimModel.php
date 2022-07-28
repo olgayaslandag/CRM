@@ -26,12 +26,26 @@ class YerlesimModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    public function getAll($filter)
+    public function getAll()
     {
+        $builder = $this->builder($this->table);
+        $builder = $builder->select("
+            yerlesimler.id,
+            yerlesimler.unvan,
+            yerlesimler.adres,
+            yerlesimler.tel,
+            yerlesimler.faks,
+            yerlesimler.eposta,
+            yerlesimler.vergi_daire,
+            yerlesimler.vergi_no,
+            yerlesim_tipler.tanim as yerlesim_tip,
+            iller.tanim as il_adi
+        ")
+        ->join("yerlesim_tipler", "yerlesim_tipler.id=yerlesimler.yerlesim_tip")
+        ->join("iller", "iller.id=yerlesimler.il_id")
+        ->get();
 
-        //$builder = $this->builder($this->table);
-
-
+        return $builder->getResult();
     }
 
 }

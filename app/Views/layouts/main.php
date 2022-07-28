@@ -16,12 +16,20 @@
 <meta name="msapplication-TileImage" content="<?php echo site_url('assets/img/favicons/mstile-150x150.png'); ?>">
 <meta name="theme-color" content="#ffffff">
 
-<script src="<?php echo site_url('assets/js/config.navbar-vertical.js'); ?>"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
 <link rel="stylesheet" href="<?php echo site_url('assets/lib/perfect-scrollbar/perfect-scrollbar.css'); ?>">
+<link rel="stylesheet" href="<?php echo site_url('assets/css/select2.min.css'); ?>">
+<link rel="stylesheet" href="<?php echo site_url('assets/css/select2-bootstrap4.min.css'); ?>">
 <link rel="stylesheet" href="<?php echo site_url('assets/css/theme.css'); ?>">
 
-<style> body{background: #e8e8e8;}</style>
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:100,200,300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+<style> 
+    body{background: #e8e8e8;}
+    .select2-container .select2-selection--single .select2-selection__rendered {text-align: left;}
+</style>
 </head>
 
 
@@ -188,7 +196,7 @@
                                     <a class="notification notification-flush bg-200" href="#!">
                                         <div class="notification-avatar">
                                             <div class="avatar avatar-2xl mr-3">
-                                                <img class="rounded-circle" src="assets/img/team/1-thumb.png" alt="" />
+                                                <img class="rounded-circle" src="<?php echo base_url('assets/img/team/1-thumb.png'); ?>" alt="" />
 
                                             </div>
                                         </div>
@@ -220,7 +228,7 @@
                                     <a class="notification notification-flush" href="#!">
                                         <div class="notification-avatar">
                                             <div class="avatar avatar-2xl mr-3">
-                                                <img class="rounded-circle" src="assets/img/icons/weather-sm.jpg" alt="" />
+                                                <img class="rounded-circle" src="<?php echo base_url('assets/img/icons/weather-sm.jpg'); ?>" alt="" />
 
                                             </div>
                                         </div>
@@ -292,13 +300,13 @@
                         <p class="fs--1">Choose the perfect color mode for your app. </p>
                         <div class="btn-group btn-group-toggle btn-block" data-toggle="buttons">
                             <div class="btn btn-theme-default custom-control custom-radio custom-radio-success active">
-                                <label class="cursor-pointer hover-overlay" for="theme-mode-default"><img class="w-100" src="assets/img/generic/falcon-mode-default.jpg" alt="" /></label>
+                                <label class="cursor-pointer hover-overlay" for="theme-mode-default"><img class="w-100" src="<?php echo base_url('assets/img/generic/falcon-mode-default.jpg'); ?>" alt="" /></label>
                                 <label class="cursor-pointer mb-0 d-flex justify-content-center pl-3" for="theme-mode-default">
                                     <input class="custom-control-input" id="theme-mode-default" type="radio" name="colorScheme" checked="checked" value="theme-mode-default" data-page-url="../index.html" /><span class="custom-control-label">Light</span>
                                 </label>
                             </div>
                             <div class="btn btn-theme-dark custom-control custom-radio custom-radio-success">
-                                <label class="cursor-pointer hover-overlay" for="theme-mode-dark"><img class="w-100" src="assets/img/generic/falcon-mode-dark.jpg" alt="" /></label>
+                                <label class="cursor-pointer hover-overlay" for="theme-mode-dark"><img class="w-100" src="<?php echo base_url('assets/img/generic/falcon-mode-dark.jpg'); ?>" alt="" /></label>
                                 <label class="cursor-pointer mb-0 d-flex justify-content-center pl-3" for="theme-mode-dark">
                                     <input class="custom-control-input" id="theme-mode-dark" type="radio" name="colorScheme" value="theme-mode-dark" data-page-url="../documentation/dark-mode.html" /><span class="custom-control-label">Dark</span>
                                 </label>
@@ -306,7 +314,7 @@
                         </div>
                         <hr />
                         <div class="d-flex justify-content-between">
-                            <div class="media flex-grow-1"><img class="mr-2" src="assets/img/icons/left-arrow-from-left.svg" width="20" alt="" />
+                            <div class="media flex-grow-1"><img class="mr-2" src="<?php echo base_url('assets/img/icons/left-arrow-from-left.svg'); ?>" width="20" alt="" />
                                 <div class="media-body">
                                     <h5 class="fs-0">RTL Mode</h5>
                                     <p class="fs--1 mb-0">Switch your language direction </p>
@@ -319,7 +327,7 @@
                         </div>
                         <hr />
                         <div class="d-flex justify-content-between">
-                            <div class="media flex-grow-1"><img class="mr-2" src="assets/img/icons/arrows-h.svg" width="20" alt="" />
+                            <div class="media flex-grow-1"><img class="mr-2" src="<?php echo base_url('assets/img/icons/arrows-h.svg'); ?>" width="20" alt="" />
                                 <div class="media-body">
                                     <h5 class="fs-0">Fluid Layout</h5>
                                     <p class="fs--1 mb-0">Toggle container layout system </p>
@@ -331,7 +339,7 @@
                             </div>
                         </div>
                         <hr />
-                        <div class="media"><img class="mr-2" src="assets/img/icons/paragraph.svg" width="20" alt="" />
+                        <div class="media"><img class="mr-2" src="<?php echo base_url('assets/img/icons/paragraph.svg'); ?>" width="20" alt="" />
                             <div class="media-body">
                                 <h5 class="fs-0 d-flex align-items-center">Navigation Position <span class="badge badge-pill badge-soft-success fs--2 ml-2">Updated</span></h5>
                                 <p class="fs--1 mb-2">Select a suitable navigation system for your web application </p>
@@ -355,13 +363,13 @@
                         <div class="btn-group-toggle btn-block btn-group-navbar-style" data-toggle="buttons">
                             <div class="btn-group btn-block">
                                 <div class="btn p-0 text-left custom-control custom-radio custom-radio-success mr-2 active">
-                                    <label class="cursor-pointer w-100" for="navbar-style-transparent"><img class="w-100" src="assets/img/generic/default.png" alt="" /></label>
+                                    <label class="cursor-pointer w-100" for="navbar-style-transparent"><img class="w-100" src="<?php echo base_url('assets/img/generic/default.png'); ?>" alt="" /></label>
                                     <label class="cursor-pointer d-flex mb-0 pl-3 ml-2" for="navbar-style-transparent">
                                         <input class="custom-control-input" id="navbar-style-transparent" type="radio" name="navbarVertical" checked="checked" data-page-url="../index.html" value="transparent" /><span class="custom-control-label"> Transparent</span>
                                     </label>
                                 </div>
                                 <div class="btn p-0 text-left custom-control custom-radio custom-radio-success mr-2">
-                                    <label class="cursor-pointer w-100" for="navbar-style-inverted"><img class="w-100" src="assets/img/generic/inverted.png" alt="" /></label>
+                                    <label class="cursor-pointer w-100" for="navbar-style-inverted"><img class="w-100" src="<?php echo base_url('assets/img/generic/inverted.png'); ?>" alt="" /></label>
                                     <label class="cursor-pointer d-flex mb-0 pl-3 ml-2" for="navbar-style-inverted">
                                         <input class="custom-control-input" id="navbar-style-inverted" type="radio" name="navbarVertical" data-page-url="../layouts/navbar-vertical-inverted.html" value="inverted" /><span class="custom-control-label"> Inverted</span>
                                     </label>
@@ -369,13 +377,13 @@
                             </div>
                             <div class="btn-group btn-block mt-3">
                                 <div class="btn p-0 text-left custom-control custom-radio custom-radio-success mr-2">
-                                    <label class="cursor-pointer w-100" for="navbar-style-card"><img class="w-100" src="assets/img/generic/card.png" alt="" /></label>
+                                    <label class="cursor-pointer w-100" for="navbar-style-card"><img class="w-100" src="<?php echo base_url('assets/img/generic/card.png'); ?>" alt="" /></label>
                                     <label class="cursor-pointer d-flex mb-0 pl-3 ml-2" for="navbar-style-card">
                                         <input class="custom-control-input" id="navbar-style-card" type="radio" name="navbarVertical" data-page-url="../layouts/navbar-vertical-card.html" value="card" /><span class="custom-control-label"> Card</span>
                                     </label>
                                 </div>
                                 <div class="btn p-0 text-left custom-control custom-radio custom-radio-success mr-2">
-                                    <label class="cursor-pointer w-100" for="navbar-style-vibrant"><img class="w-100" src="assets/img/generic/vibrant.png" alt="" /></label>
+                                    <label class="cursor-pointer w-100" for="navbar-style-vibrant"><img class="w-100" src="<?php echo base_url('assets/img/generic/vibrant.png'); ?>" alt="" /></label>
                                     <label class="cursor-pointer d-flex mb-0 pl-3 ml-2" for="navbar-style-vibrant">
                                         <input class="custom-control-input" id="navbar-style-vibrant" type="radio" name="navbarVertical" data-page-url="../layouts/navbar-vertical-vibrant.html" value="vibrant" /><span class="custom-control-label"> Vibrant</span>
                                     </label>
@@ -383,7 +391,7 @@
                             </div>
                         </div>
                         <hr />
-                        <div class="text-center mt-5"><img class="mb-4" src="assets/img/illustrations/settings.png" alt="" width="120" />
+                        <div class="text-center mt-5"><img class="mb-4" src="<?php echo base_url('assets/img/illustrations/settings.png'); ?>" alt="" width="120" />
                             <h5>Like What You See?</h5>
                             <p class="fs--1">Get Falcon now and create beautiful dashboards with hundreds of widgets.</p><a class="btn btn-primary" href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/">Purchase</a>
                         </div>
@@ -447,16 +455,9 @@
         </div>
     </div>
 </main>
-<!-- ===============================================-->
-<!--    End of Main Content-->
-<!-- ===============================================-->
 
 
-
-
-<!-- ===============================================-->
-<!--    JavaScripts-->
-<!-- ===============================================-->
+<script src="<?php echo site_url('assets/js/config.navbar-vertical.js'); ?>"></script>
 <script src="<?php echo site_url('assets/js/jquery.min.js'); ?>"></script>
 <script src="<?php echo site_url('assets/js/popper.min.js'); ?>"></script>
 <script src="<?php echo site_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -465,10 +466,50 @@
 <script src="<?php echo site_url('assets/lib/sticky-kit/sticky-kit.min.js'); ?>"></script>
 <script src="<?php echo site_url('assets/lib/is_js/is.min.js'); ?>"></script>
 <script src="<?php echo site_url('assets/lib/lodash/lodash.min.js'); ?>"></script>
+<script src="<?php echo site_url('assets/js/select2.min.js'); ?>"></script>
 <script src="<?php echo site_url('assets/lib/perfect-scrollbar/perfect-scrollbar.js'); ?>"></script>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:100,200,300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+
 <!--<script src="assets/js/theme.js"></script>-->
 
+<script>
+$(function(){
+    /*
+    * --------------------------------------------------------------------
+    * Select2 Define
+    * --------------------------------------------------------------------
+    */
+    $('.select2').select2({
+        theme: 'bootstrap4',
+        allowClear: true
+    });
+
+
+
+
+    /*
+    * --------------------------------------------------------------------
+    * Select2 Ajax Define
+    * --------------------------------------------------------------------
+    */
+    $(".select2-post").select2({
+        theme: 'bootstrap4',
+        allowClear: true,
+        ajax: {
+          dataType: "json",
+          type: "GET",
+          data: function (params) {
+            return {q: params.term};
+          },
+          processResults: function (data) {
+            console.log(data)
+            return {results: data};
+          },
+          cache: true,
+        },
+        minimumInputLength: 2
+    });
+});
+</script>
 <?php $this->renderSection("javascript"); ?>
 
 </body>

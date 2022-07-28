@@ -21,6 +21,7 @@
                         <th><?php echo lang("Yerlesim.table_eposta"); ?></th>
                         <th><?php echo lang("Yerlesim.table_vergi_no"); ?></th>
                         <th><?php echo lang("Yerlesim.table_il_id"); ?></th>
+                        <th><?php echo lang("Yerlesim.table_yerlesim_tip"); ?></th>
                         <th width="100"></th>
                     </tr>
                 </thead>
@@ -31,7 +32,8 @@
                         <td><?php echo $yerlesim->tel; ?></td>
                         <td><?php echo $yerlesim->eposta; ?></td>
                         <td><?php echo $yerlesim->vergi_no; ?></td>
-                        <td><?php echo $yerlesim->il_id; ?></td>
+                        <td><?php echo $yerlesim->il_adi; ?></td>
+                        <td><?php echo $yerlesim->yerlesim_tip; ?></td>
                         <td>
                             <button id="<?php echo $yerlesim->id; ?>" class="btn btn-primary btn-sm detail" data-toggle="modal" data-target="#detay">
                                 <i class="fa fa-info"></i>
@@ -83,7 +85,14 @@
                 "name" => "ekleyen_id", 
                 "value" => session()->get("id")
             ]);
-        
+        ?>
+        <select class="form-control mb-3" name="yerlesim_tip">
+            <option value=""><?php echo lang("Yerlesim.table_yerlesim_tip"); ?></option>
+            <?php foreach($yerlesim_tipleri as $tip){
+                echo "<option value='".$tip->id."'>".$tip->tanim."</option>";
+            } ?>
+        </select>
+        <?php 
             echo form_input([
                 "type" => "text", 
                 "name" => "unvan", 
@@ -172,6 +181,11 @@
 <?php $this->section("javascript"); ?>
 <script>
 $(function(){
+    /*
+    * --------------------------------------------------------------------
+    * Delete Method
+    * --------------------------------------------------------------------
+    */
     $(".sil").on("click", function(){
         var kontrol = confirm("Emin Misin?");
         if(!kontrol){
@@ -223,6 +237,10 @@ $(function(){
                         <th><?php echo lang("Yerlesim.table_vergi_daire"); ?></th>\
                         <td>' + data.result.vergi_daire + '</td>\
                     </tr>\
+                    <tr>\
+                        <th><?php echo lang("Yerlesim.table_yerlesim_tip"); ?></th>\
+                        <td>' + data.result.yerlesim_tip + '</td>\
+                    <tr>\
                     <tr>\
                         <th><?php echo lang("Yerlesim.table_vergi_no"); ?></th>\
                         <td>' + data.result.vergi_no + '</td>\
