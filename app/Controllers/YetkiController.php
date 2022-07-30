@@ -78,17 +78,44 @@ class YetkiController extends BaseController
     public function kullaniciEkle()
     {
 
+        /*
+         *--------------------------------------------------
+         *    Clear special codes from POST
+         *--------------------------------------------------
+         */
+        $posts = removeHtml($this->request->getPost());
 
-    	$this->UserEntity->adsoyad = "Olgay Aslandağ";
-    	$this->UserEntity->eposta = "olgay@toracevre.com";
-    	$this->UserEntity->telefon = "05334137209";
-    	$this->UserEntity->setPassword("Tora12345.");
-    	$this->UserEntity->aktif = 1;
-    	$this->UserEntity->ekleyen_id = 1;
-    	$this->UserEntity->guncelleyen_id = 1;
 
-    	
-    	return $this->response->setJSON($model->findAll());
+
+
+        /*
+         *--------------------------------------------------
+         *    Validation Rules Check
+         *--------------------------------------------------
+         */
+        $validation = \Config\Services::validation();
+        if($validation->run($posts, 'user')){
+            
+            $this->UserEntity->adsoyad = $posts["adsoyad"];
+            $this->UserEntity->eposta = $posts["eposta"];
+            $this->UserEntity->telefon = $posts["telefon"];
+            $this->UserEntity->setPassword($posts["sifre"]);
+            $this->UserEntity->aktif = 1;
+            $this->UserEntity->ekleyen_id = 1;
+            $this->UserEntity->guncelleyen_id = 1;
+
+            if($this->UserModel->save($this->UserEntity)){
+                session()->set(["status" => true, "message" => lang("Yetki.save_success")]);
+                return redirect()->route("loginView");
+            }else{
+                session()->set(["status" => false, "message" => lang("Yetki.save_error")]);
+                return redirect()->back()->withInput();
+            }
+
+        } else {
+            session()->set(["status" => false, "message" => implode("<br />", $validation->getErrors())]);
+            return redirect()->back()->withInput();
+        }
 
     }
 
@@ -96,8 +123,33 @@ class YetkiController extends BaseController
     {
         echo "Çıkış yapılıyor.";
         session_destroy();
-        return redirect()->route('giris'); exit;
+        return redirect()->route("loginView"); exit;
 
+    }
+
+    public function kayit()
+    {
+        return view('yetki/register');
+    }
+
+    public function sifremi_unuttum()
+    {
+        return view("yetki/sifremi_unuttum");
+    }
+
+    public function remember_action()
+    {
+        $posts = removeHtml($this->request->getPost());
+
+        $user = $this->UserModel->where("eposta", $posts["eposta"])->find();
+        
+        if($user){
+            session()->set(["status" => true, "message" => lang("Yetki.remember_success")]);
+            return redirect()->route("loginView");
+        } else {
+            session()->set(["status" => false, "message" => lang("Yetki.remember_error")]);
+            return redirect()->back()->withInput();
+        }
     }
 
 }

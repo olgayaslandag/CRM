@@ -41,4 +41,13 @@ class Validation extends BaseConfig
     //--------------------------------------------------------------------
     // Rules
     //--------------------------------------------------------------------
+
+
+
+    public $user = [
+        "adsoyad" => "required|alpha_space|min_length[3]|max_length[20]",
+        "telefon" => "required|is_unique[sys_kullanici.telefon]",
+        "eposta"  => "required|valid_email|is_unique[sys_kullanici.eposta]",
+        "sifre"   => "required|min_length[8]|max_length[10]"
+    ];
 }

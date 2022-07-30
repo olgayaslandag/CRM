@@ -28,4 +28,10 @@ class GelenEvrakEntity extends Entity {
 
 	protected $dates = ["ekleme_tarihi", "guncelleme_tarihi", "silme_tarihi"];
 
+	public function produceDocNo($id)
+	{
+		$sayi = sprintf("%05d", (intval($id) + 1));
+		$this->attributes['belge_no'] = "TORA" . $sayi;
+	}
+
 }

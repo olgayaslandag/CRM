@@ -6,6 +6,7 @@ return [
 
 
 	"new_button" => "Yeni Ekle",
+	"filter_button_text" => "Filtrele",
 
 	"detail_title" => "Kullanıcı Detay",
 	"new_form_title" => "Yeni Kullanıcı Formu",

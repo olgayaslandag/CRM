@@ -26,7 +26,7 @@ class YerlesimModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    public function getAll()
+    public function getAll(Object $filter)
     {
         $builder = $this->builder($this->table);
         $builder = $builder->select("
@@ -40,10 +40,22 @@ class YerlesimModel extends Model
             yerlesimler.vergi_no,
             yerlesim_tipler.tanim as yerlesim_tip,
             iller.tanim as il_adi
-        ")
-        ->join("yerlesim_tipler", "yerlesim_tipler.id=yerlesimler.yerlesim_tip")
-        ->join("iller", "iller.id=yerlesimler.il_id")
-        ->get();
+        ");
+        $builder = $builder->join("yerlesim_tipler", "yerlesim_tipler.id=yerlesimler.yerlesim_tip");
+        $builder = $builder->join("iller", "iller.id=yerlesimler.il_id");
+
+        if(isset($filter->unvan))
+            $builder = $builder->like("yerlesimler.unvan", $filter->unvan);
+        if(isset($filter->tel))
+            $builder = $builder->where("yerlesimler.tel", $filter->tel);
+        if(isset($filter->eposta))
+            $builder = $builder->where("yerlesimler.eposta", $filter->eposta);
+        if(isset($filter->vergi_no))
+            $builder = $builder->where("yerlesimler.vergi_no", $filter->vergi_no);
+        if(isset($filter->yerlesim_tip))
+            $builder = $builder->where("yerlesimler.yerlesim_tip", $filter->yerlesim_tip);
+
+        $builder = $builder->get();
 
         return $builder->getResult();
     }

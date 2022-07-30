@@ -5,6 +5,7 @@ return [
 	"page_desc" => "Documentation and examples for opt-in styling of tables with Dinamik Dizayn.",
 
 	"new_button" => "Yeni Ekle",
+	"filter_button_text" => "Filtrele",
 
 
 	"new_form_title" => "Yerleşim Ekleme Formu",

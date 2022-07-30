@@ -25,6 +25,7 @@ return [
 	"table_kargoFirma" => "Kargo Firması",
 	"table_barkodNo" => "Barkod No",
 	"table_konu" => "Konu",
+	"table_dosya" => "Dosya",
 	"table_arsivKlasorBilgi" => "Arşiv/Klasör Bilgisi",
 
 	"select_file" => "Dosya Seçin",

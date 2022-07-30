@@ -9,15 +9,17 @@ class YerlesimController extends BaseController
 
 	public function index()
 	{
+		$filter = removeHtml((Object) $this->request->getGet(), "OBJECT");
 
 		$YerlesimModel = new \App\Models\Yerlesim\YerlesimModel();
 		$YerlesimTipModel = new \App\Models\Yerlesim\YerlesimTipModel();
-		$yerlesimler = $YerlesimModel->getAll();
+		$yerlesimler = $YerlesimModel->getAll($filter);
 		$yerlesimTipler = $YerlesimTipModel->findAll();
 
 		$data = [
 			"yerlesimler" => $yerlesimler,
-			"yerlesim_tipleri" => $yerlesimTipler
+			"yerlesim_tipleri" => $yerlesimTipler,
+			"filter" => $filter
 		];
 
 		return view("yerlesim/yerlesimler", $data);

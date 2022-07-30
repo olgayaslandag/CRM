@@ -11,6 +11,72 @@
             <span class="fas fa-chevron-right ml-1 fs--2"></span>
         </button>
 
+        <?php echo form_open("", ["method" => "get"]); ?>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <?php echo form_input([
+                    "type" => "date",
+                    "name" => "tarih",
+                    "class"=> "form-control form-control-sm mb-2",
+                    "placeholder" => lang("Yerlesim.table_tarih"),
+                    "value" => isset($filter->tarih) ? $filter->tarih : null
+                ]); ?>
+            </li>
+            
+            <li class="list-inline-item">
+                <?php echo form_input([
+                    "type" => "text",
+                    "name" => "unvan",
+                    "class"=> "form-control form-control-sm mb-2",
+                    "placeholder" => lang("Yerlesim.table_unvan"),
+                    "value" => isset($filter->unvan) ? $filter->unvan : null
+                ]); ?>
+            </li>
+            <li class="list-inline-item">
+                <?php echo form_input([
+                    "type" => "number",
+                    "name" => "tel",
+                    "class"=> "form-control form-control-sm mb-2",
+                    "placeholder" => lang("Yerlesim.table_tel"),
+                    "value" => isset($filter->tel) ? $filter->tel : null
+                ]); ?>
+            </li>
+            <li class="list-inline-item">
+                <?php echo form_input([
+                    "type" => "email",
+                    "name" => "eposta",
+                    "class"=> "form-control form-control-sm mb-2",
+                    "placeholder" => lang("Yerlesim.table_eposta"),
+                    "value" => isset($filter->eposta) ? $filter->eposta : null
+                ]); ?>
+            </li>
+            <li class="list-inline-item">
+                <?php echo form_input([
+                    "type" => "number",
+                    "name" => "vergi_no",
+                    "class"=> "form-control form-control-sm mb-2",
+                    "placeholder" => lang("Yerlesim.table_vergi_no"),
+                    "value" => isset($filter->vergi_no) ? $filter->vergi_no : null
+                ]); ?>
+            </li>
+            <li class="list-inline-item">
+                <select class="form-control form-control-sm mb-2" name="yerlesim_tip">
+                    <option value=""><?php echo lang("Yerlesim.table_yerlesim_tip"); ?></option>
+                    <?php foreach($yerlesim_tipleri as $tip){
+                        $selected = isset($filter->yerlesim_tip) && $filter->yerlesim_tip == $tip->id ? "selected" : null; 
+                        echo "<option value='".$tip->id."' ".$selected.">".$tip->tanim."</option>";
+                    }?>
+                </select>
+            </li>
+            <li class="list-inline-item">
+                <?php echo form_button([
+                    "type" => "submit", 
+                    "class" => "btn btn-primary btn-sm", 
+                    "content" => lang("Yerlesim.filter_button_text")
+                ]); ?>
+            </li>
+        </ul>
+        <?php echo form_close(); ?>
 
         <div class="table-responsive">
             <table class="table">

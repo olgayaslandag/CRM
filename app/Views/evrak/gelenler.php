@@ -19,14 +19,16 @@
                     "type" => "date",
                     "name" => "tarih",
                     "class"=> "form-control form-control-sm mb-2",
-                    "placeholder" => lang("Evrak.table_tarih")
+                    "placeholder" => lang("Evrak.table_tarih"),
+                    "value" => isset($filter->tarih) ? $filter->tarih : null
                 ]); ?>
             </li>
             <li class="list-inline-item">
                 <select class="form-control form-control-sm mb-2" name="belge_tur">
                     <option value=""><?php echo lang("Evrak.table_belgeTur"); ?></option>
                     <?php foreach($evrakTurler as $tur){
-                        echo "<option value='".$tur->id."'>".$tur->tanim."</option>";
+                        $selected = isset($filter->belge_tur) && $filter->belge_tur == $tur->id ? "selected" : null; 
+                        echo "<option value='".$tur->id."' ".$selected.">".$tur->tanim."</option>";
                     }?>
                 </select>
             </li>
@@ -35,7 +37,8 @@
                     "type" => "text",
                     "name" => "alici_firma",
                     "class"=> "form-control form-control-sm mb-2",
-                    "placeholder" => lang("Evrak.table_aliciFirma")
+                    "placeholder" => lang("Evrak.table_aliciFirma"),
+                    "value" => isset($filter->alici_firma) ? $filter->alici_firma : null
                 ]); ?>
             </li>
             <li class="list-inline-item">
@@ -43,7 +46,17 @@
                     "type" => "text",
                     "name" => "ilgili_firma",
                     "class"=> "form-control form-control-sm mb-2",
-                    "placeholder" => lang("Evrak.table_ilgiliFirma")
+                    "placeholder" => lang("Evrak.table_ilgiliFirma"),
+                    "value" => isset($filter->ilgili_firma) ? $filter->ilgili_firma : null
+                ]); ?>
+            </li>
+            <li class="list-inline-item">
+                <?php echo form_input([
+                    "type" => "text",
+                    "name" => "kargo_firma",
+                    "class"=> "form-control form-control-sm mb-2",
+                    "placeholder" => lang("Evrak.table_kargoFirma"),
+                    "value" => isset($filter->kargo_firma) ? $filter->kargo_firma : null
                 ]); ?>
             </li>
             <li class="list-inline-item">
@@ -351,6 +364,10 @@ $(function(){
                 <tr>\
                     <th><?php echo lang("Evrak.table_konu"); ?></th>\
                     <td>'+data.konu+'</td>\
+                </tr>\
+                <tr>\
+                    <th><?php echo lang("Evrak.table_dosya"); ?></th>\
+                    <td> <a href="'+data.dosya_url+'" target="_blank" class="btn btn-primary"><i class="fa fa-folder"></i></a></td>\
                 </tr>\
             </table>\
           </div>';

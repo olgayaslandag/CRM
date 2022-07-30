@@ -24,7 +24,7 @@ class YetkiFilter implements FilterInterface
         } else {
 
             if(!session()->get("login")){
-                return redirect()->route('giris'); exit;
+                return redirect()->route('loginView'); exit;
             }
 
         }

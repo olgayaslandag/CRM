@@ -26,7 +26,7 @@ class KullaniciModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    public function getAll($filter=[])
+    public function getAll(Object $filter)
     {
 
         $builder = $this->builder($this->table);
@@ -39,6 +39,14 @@ class KullaniciModel extends Model
             yetkiler.tanim
         ");
         $builder = $builder->join("yetkiler", "yetkiler.id=sys_kullanici.yetki_id");
+        if(isset($filter->adsoyad))
+            $builder = $builder->like("adsoyad", $filter->adsoyad);
+        if(isset($filter->telefon))
+            $builder = $builder->where("telefon", $filter->telefon);
+        if(isset($filter->eposta))
+            $builder = $builder->where("eposta", $filter->eposta);
+        if(isset($filter->rank))
+            $builder = $builder->where("yetki_id", $filter->rank);
         
         if($this->tempUseSoftDeletes)
             $builder->where($this->table . '.' . $this->deletedField, null);

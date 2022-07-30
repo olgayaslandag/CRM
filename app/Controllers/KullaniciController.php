@@ -22,17 +22,18 @@ class KullaniciController extends BaseController
 
 	public function index()
 	{
-		
-		$kullanicilar = $this->KullaniciModel->getAll();
+		$filter = removeHtml((Object) $this->request->getGet(), "OBJECT");
+
+		$kullanicilar = $this->KullaniciModel->getAll($filter);
 		$yetkiler = $this->YetkiModel->findAll();
 
 		$data = [
 			"kullanicilar" => $kullanicilar,
 			"yetkiler" => $yetkiler,
+			"filter" => $filter
 		];
 
 		return view("kullanici/kullanicilar", $data);
-
 	}
 
 	public function delete($id)

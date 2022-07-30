@@ -62,12 +62,6 @@
                         </a>
                     </li>
 
-
-
-
-
-
-
                     <li class="nav-item">
                         <a class="nav-link dropdown-indicator" href="#home" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="home">
                             <div class="d-flex align-items-center">
@@ -263,7 +257,7 @@
 
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../pages/settings.html">Settings</a>
-                            <a class="dropdown-item" href="<?php echo site_url('cikis'); ?>">Logout</a>
+                            <a class="dropdown-item" href="<?php echo site_url(route_to("logoutAction")); ?>">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -272,8 +266,9 @@
 
         <?php echo view_cell("App\Components\AlertComponent::index");  ?>
         
-        <?php $this->renderSection("content"); ?>
-
+        <div style="zoom: 0.9;">
+            <?php $this->renderSection("content"); ?>
+        </div>
         <footer>
             <div class="row no-gutters justify-content-between fs--1 mt-4 mb-3">
                 <div class="col-12 col-sm-auto text-center">

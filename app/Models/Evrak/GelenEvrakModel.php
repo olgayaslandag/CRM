@@ -43,24 +43,28 @@ class GelenEvrakModel extends Model
             gelen_evraklar.arsiv_klasor_bilgi,
             gelen_evraklar.ekleyen_id,
             evrak_tur.tanim,
-            sys_kullanici.adsoyad
+            sys_kullanici.adsoyad,
+            dosyalar.dosya_adi
         ");
         $builder = $builder->join("evrak_tur", "evrak_tur.id=gelen_evraklar.evrak_tur_id");
         $builder = $builder->join("sys_kullanici", "sys_kullanici.id=gelen_evraklar.ekleyen_id");
         $builder = $builder->join("yerlesimler as y_alici", "y_alici.id=gelen_evraklar.alici_firma");
         $builder = $builder->join("yerlesimler as y_ilgili", "y_ilgili.id=gelen_evraklar.ilgili_firma");
         $builder = $builder->join("yerlesimler as y_kargo", "y_kargo.id=gelen_evraklar.kargo_firma", "LEFT");
+        $builder = $builder->join("dosyalar", "dosyalar.gelen_evrak_id=gelen_evraklar.id");
         
         if($this->tempUseSoftDeletes)
             $builder->where($this->table . '.' . $this->deletedField, null);
         if(isset($filter->tarih))
             $builder = $builder->where("gelen_evraklar.tarih", $filter->tarih);
         if(isset($filter->alici_firma))
-            $builder = $builder->like("gelen_evraklar.alici_firma", $filter->alici_firma);
+            $builder = $builder->like("y_alici.unvan", $filter->alici_firma);
         if(isset($filter->belge_tur))
             $builder = $builder->where("gelen_evraklar.evrak_tur_id", $filter->belge_tur);
         if(isset($filter->ilgili_firma))
-            $builder = $builder->where("gelen_evraklar.ilgili_firma", $filter->ilgili_firma);
+            $builder = $builder->like("y_ilgili.unvan", $filter->ilgili_firma);
+        if(isset($filter->kargo_firma))
+            $builder = $builder->like("y_kargo.unvan", $filter->kargo_firma);
 
 
         $builder = $builder->orderBy("gelen_evraklar.id", "DESC");
@@ -88,10 +92,14 @@ class GelenEvrakModel extends Model
             gelen_evraklar.arsiv_klasor_bilgi,
             gelen_evraklar.ekleyen_id,
             evrak_tur.tanim,
-            sys_kullanici.adsoyad
+            sys_kullanici.adsoyad,
+            dosyalar.dosya_adi,
+            dosyalar.ekleme_tarihi as dosya_tarih
         ");
         $builder = $builder->join("evrak_tur", "evrak_tur.id=gelen_evraklar.evrak_tur_id");
         $builder = $builder->join("sys_kullanici", "sys_kullanici.id=gelen_evraklar.ekleyen_id");
+        $builder = $builder->join("dosyalar", "dosyalar.gelen_evrak_id=gelen_evraklar.id");
+
         if(isset($filter->id))
             $builder = $builder->where("gelen_evraklar.id", $filter->id);
 
@@ -100,6 +108,13 @@ class GelenEvrakModel extends Model
         $builder = $builder->get();
         return $builder->getResult();
 
+    }
+
+    public function last_id()
+    {
+        $builder = $this->builder($this->table);
+        $builder = $builder->orderBy('id', 'DESC')->limit(1)->get()->getResult();
+        return $builder ? $builder[0]->id : false;
     }
 
 }

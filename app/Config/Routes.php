@@ -37,13 +37,15 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 
-
-$routes->get('/giris', 'YetkiController::index');
-$routes->post('/giris', 'YetkiController::girisPost');
-$routes->get('/ekle', 'YetkiController::kullaniciEkle');
-$routes->get('/kayit', 'YetkiController::kayit');
-$routes->get('/sifremi_unuttum', 'YetkiController::sifremi_unuttum');
-$routes->get('/cikis', 'YetkiController::cikis');
+$routes->group("/yetki", function($routes){
+    $routes->get('giris', 'YetkiController::index', ["as" => "loginView"]);
+    $routes->post('giris', 'YetkiController::girisPost', ["as" => "loginAction"]);
+    $routes->post('ekle', 'YetkiController::kullaniciEkle', ["as" => "userAdd"]);
+    $routes->get('kayit', 'YetkiController::kayit', ["as" => "registerView"]);
+    $routes->get('sifremi_unuttum', 'YetkiController::sifremi_unuttum', ["as" => "rememberView"]);
+    $routes->post('sifremi_unuttum', 'YetkiController::remember_action', ["as" => "rememberAction"]);
+    $routes->get('cikis', 'YetkiController::cikis', ["as" => "logoutAction"]);
+});
 
 
 

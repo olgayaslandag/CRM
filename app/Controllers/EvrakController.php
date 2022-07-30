@@ -22,17 +22,7 @@ class EvrakController extends BaseController
 
 	public function gelenler()
 	{
-
-		$filter = (Object) $this->request->getGet();
-
-		foreach($filter as $k=>$v){
-			if($v == "" || !$v){
-				unset($filter->$k);
-			}else{
-				$filter->$k = inputRemoveTag($v);
-			}
-		}
-
+		$filter = removeHtml((Object) $this->request->getGet(), "OBJECT");
 		$EvrakTurModel = new \App\Models\Evrak\EvrakTurModel();
 
 
@@ -45,7 +35,6 @@ class EvrakController extends BaseController
 			"filter" => $filter
 		];
 		return view("evrak/gelenler", $data);
-
 	}
 
 	public function gelen_ekle()
@@ -71,12 +60,15 @@ class EvrakController extends BaseController
         $dosya = $this->upload->upload($this->request->getFile("dosya"));
         
         if($dosya["status"]){
+        	$last_id = $this->GelenEvrakModel->last_id();
+
         	$entity = new \App\Entities\Evrak\GelenEvrakEntity;
 			$posts = $this->request->getPost();
 			foreach($posts as $k=>$v){
 				$posts[$k] = inputRemoveTag($v);
 				$entity->$k = $v;
 			}
+			$entity->produceDocNo($last_id);
 
 			if($this->GelenEvrakModel->save($entity)){
 
@@ -124,6 +116,12 @@ class EvrakController extends BaseController
 
     	$filter = (Object) ["id" => $id];
     	$evrak = $this->GelenEvrakModel->get($filter);
+
+    	if($evrak){
+    		$path = WRITEPATH . 'uploads/' . date("Ymd", strtotime($evrak[0]->dosya_tarih)) . "/" . $evrak[0]->dosya_adi;
+    		$file = new \CodeIgniter\Files\File($path);
+    		$evrak[0]->dosya_url = $file->getRealPath();
+    	}
 
     	$data = [
     		"status" => $evrak ? true : false,
