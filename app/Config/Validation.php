@@ -45,10 +45,10 @@ class Validation extends BaseConfig
 
 
     public $user = [
-        "adsoyad" => "required|alpha_space|min_length[3]|max_length[20]",
+        "adsoyad" => "required|alpha_space|min_length[3]|max_length[30]",
         "telefon" => "required|is_unique[sys_kullanici.telefon]",
         "eposta"  => "required|valid_email|is_unique[sys_kullanici.eposta]",
-        "sifre"   => "required|min_length[8]|max_length[10]"
+        "sifre"   => "required|min_length[8]|max_length[20]"
     ];
 
     public $well = [
