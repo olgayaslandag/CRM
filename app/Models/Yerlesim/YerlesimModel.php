@@ -60,4 +60,38 @@ class YerlesimModel extends Model
         return $builder->getResult();
     }
 
+    public function getItem(Object $filter)
+    {
+        $builder = $this->builder($this->table);
+        $builder = $builder->select("
+            yerlesimler.id,
+            yerlesimler.unvan,
+            yerlesimler.adres,
+            yerlesimler.tel,
+            yerlesimler.faks,
+            yerlesimler.eposta,
+            yerlesimler.vergi_daire,
+            yerlesimler.vergi_no,
+            yerlesimler.ilce_id,
+            yerlesim_tipler.tanim as yerlesim_tip,
+            iller.tanim as il_adi
+        ");
+        $builder = $builder->join("yerlesim_tipler", "yerlesim_tipler.id=yerlesimler.yerlesim_tip");
+        $builder = $builder->join("iller", "iller.id=yerlesimler.il_id");
+        if(isset($filter->unvan))
+            $builder = $builder->like("yerlesimler.unvan", $filter->unvan);
+        if(isset($filter->tel))
+            $builder = $builder->where("yerlesimler.tel", $filter->tel);
+        if(isset($filter->eposta))
+            $builder = $builder->where("yerlesimler.eposta", $filter->eposta);
+        if(isset($filter->vergi_no))
+            $builder = $builder->where("yerlesimler.vergi_no", $filter->vergi_no);
+        if(isset($filter->yerlesim_tip))
+            $builder = $builder->where("yerlesimler.yerlesim_tip", $filter->yerlesim_tip);
+
+        $builder = $builder->limit(1);
+        $builder = $builder->get();
+
+        return $builder->getResult();
+    }
 }

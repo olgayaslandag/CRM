@@ -111,184 +111,185 @@
     </div>
 </div>
 
-
-
-
-<div class="modal modal-fixed-right fade" id="detay" tabindex="-1" role="dialog" aria-labelledby="detay" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical" role="document">
-    <div class="modal-content border-0 min-vh-100">
-      <div class="modal-header">
-        <h5 class="modal-title" id="detay"><?php echo lang("Evrak.detail_title"); ?></h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span class="font-weight-light" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body p-0">
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true" data-focus="false">
-  <div class="modal-dialog modal-dialog-vertical" role="document">
-    <div class="modal-content border-0 min-vh-100">
-      <div class="modal-header">
-        <h5 class="modal-title" id="yeniEkle"><?php echo lang("Evrak.new_form_title"); ?></h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span class="font-weight-light" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body py-5 text-center">
-        <img class="img-fluid" src="<?php echo site_url('assets/img/illustrations/modal-right.png'); ?>" alt="">
-        <?php 
-            echo form_open_multipart(base_url("evrak/gelen_ekle"), ["method" => "post", "autocomplete" => "off"]);
-            echo form_input([
-                "type" => "hidden", 
-                "name" => "ekleyen_id", 
-                "value" => session()->get("id")
-            ]);
-            
-            echo form_input([
-                "type" => "text",
-                "name" => "belge_no",
-                "class" => "form-control mb-3",
-                "required" => true,
-                "placeholder" => lang("Evrak.table_belgeNo")
-            ]);
-
-            echo form_input([
-                "type" => "date",
-                "name" => "tarih",
-                "class" => "form-control mb-3",
-                "required" => true,
-                "placeholder" => lang("Evrak.table_tarih")
-            ]);
-
-            echo '<div class="mb-3">';
-            echo form_dropdown([
-                "name" => "alici_firma", 
-                "class" => "select2-post",
-                "data-ajax--url" => base_url('yerlesim/find_select'),
-                "data-placeholder" => lang("Evrak.table_aliciFirma")
-            ]);
-            echo '</div>';
-
-            echo form_input([
-                "type" => "text",
-                "name" => "alici_kisi",
-                "class" => "form-control mb-3",
-                "required" => true,
-                "placeholder" => lang("Evrak.table_aliciKisi")
-            ]);
-
-
-
-            $evrak_turs = ["" => lang("Evrak.table_belgeTur")];
-            foreach($evrakTurler as $tur){
-                $evrak_turs[$tur->id] = $tur->tanim;
-            }
-            echo '<div class="mb-3">';
-            echo form_dropdown([
-                "name" => "evrak_tur_id",
-                "class"=> "select2",
-                "data-placeholder" => lang("Evrak.table_belgeTur"),
-            ], $evrak_turs);
-            echo '</div>';
-
-
-
-
-            echo '<div class="mb-3">';
-            echo form_dropdown([
-                "name" => "ilgili_firma", 
-                "class" => "select2-post",
-                "data-ajax--url" => base_url('yerlesim/find_select'),
-                "data-placeholder" => lang("Evrak.table_ilgiliFirma")
-            ]);
-            echo '</div>';
-
-
-
-
-            echo '<div class="mb-3">';
-            echo form_dropdown([
-                "name" => "ilgili_firma2", 
-                "class" => "select2-post",
-                "data-ajax--url" => base_url('yerlesim/find_select'),
-                "data-placeholder" => lang("Evrak.table_ilgiliFirma2")
-            ]);
-            echo '</div>';
-
-
-
-
-            echo '<div class="mb-3">';
-            echo form_dropdown([
-                "name" => "ilgili_firma3", 
-                "class" => "select2-post",
-                "data-ajax--url" => base_url('yerlesim/find_select'),
-                "data-placeholder" => lang("Evrak.table_ilgiliFirma3")
-            ]);
-            echo '</div>';
-
-
-
-            echo '<div class="mb-3">';
-            echo form_dropdown([
-                "name" => "kargo_firma", 
-                "class" => "select2-post",
-                "data-ajax--url" => base_url('yerlesim/find_select'),
-                "data-placeholder" => lang("Evrak.table_kargoFirma")
-            ]);
-            echo '</div>';
-            
-
-            
-
-            echo form_input([
-                "type" => "text",
-                "name" => "barkod_no",
-                "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_barkodNo")
-            ]);
-
-            echo form_input([
-                "type" => "text",
-                "name" => "konu",
-                "class" => "form-control mb-3",
-                "required" => true,
-                "placeholder" => lang("Evrak.table_konu")
-            ]);
-
-            echo form_input([
-                "type" => "text",
-                "name" => "arsiv_klasor_bilgi",
-                "class" => "form-control mb-3",
-                "placeholder" => lang("Evrak.table_arsivKlasorBilgi")
-            ]);
-
-            echo form_input([
-                "type" => "file",
-                "name" => "dosya",
-                "class" => "mb-3",
-                "placeholder" => lang("Evrak.select_file")
-            ]);    
-           
-            echo form_button([
-                "type" => "submit", 
-                "class" => "btn btn-primary form-control", 
-                "content" => lang("Evrak.add_button")
-            ]);
-
-            echo form_close(); 
-        ?>
-      </div>
-    </div>
-  </div>
-</div>
 <?php $this->endSection(); ?>
 
+
+
+<?php $this->section("modals"); ?>
+    <div class="modal modal-fixed-right fade" id="detay" tabindex="-1" role="dialog" aria-labelledby="detay" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-vertical" role="document">
+        <div class="modal-content border-0 min-vh-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detay"><?php echo lang("Evrak.detail_title"); ?></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span class="font-weight-light" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true" data-focus="false">
+      <div class="modal-dialog modal-dialog-vertical" role="document">
+        <div class="modal-content border-0 min-vh-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yeniEkle"><?php echo lang("Evrak.new_form_title"); ?></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span class="font-weight-light" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body py-5 text-center">
+            <img class="img-fluid" src="<?php echo site_url('assets/img/illustrations/modal-right.png'); ?>" alt="">
+            <?php 
+                echo form_open_multipart(base_url("evrak/gelen_ekle"), ["method" => "post", "autocomplete" => "off"]);
+                echo form_input([
+                    "type" => "hidden", 
+                    "name" => "ekleyen_id", 
+                    "value" => session()->get("id")
+                ]);
+                
+                echo form_input([
+                    "type" => "text",
+                    "name" => "belge_no",
+                    "class" => "form-control mb-3",
+                    "required" => true,
+                    "placeholder" => lang("Evrak.table_belgeNo")
+                ]);
+
+                echo form_input([
+                    "type" => "date",
+                    "name" => "tarih",
+                    "class" => "form-control mb-3",
+                    "required" => true,
+                    "placeholder" => lang("Evrak.table_tarih")
+                ]);
+
+                echo '<div class="mb-3">';
+                echo form_dropdown([
+                    "name" => "alici_firma", 
+                    "class" => "select2-post",
+                    "data-ajax--url" => base_url('yerlesim/find_select'),
+                    "data-placeholder" => lang("Evrak.table_aliciFirma")
+                ]);
+                echo '</div>';
+
+                echo form_input([
+                    "type" => "text",
+                    "name" => "alici_kisi",
+                    "class" => "form-control mb-3",
+                    "required" => true,
+                    "placeholder" => lang("Evrak.table_aliciKisi")
+                ]);
+
+
+
+                $evrak_turs = ["" => lang("Evrak.table_belgeTur")];
+                foreach($evrakTurler as $tur){
+                    $evrak_turs[$tur->id] = $tur->tanim;
+                }
+                echo '<div class="mb-3">';
+                echo form_dropdown([
+                    "name" => "evrak_tur_id",
+                    "class"=> "select2",
+                    "data-placeholder" => lang("Evrak.table_belgeTur"),
+                ], $evrak_turs);
+                echo '</div>';
+
+
+
+
+                echo '<div class="mb-3">';
+                echo form_dropdown([
+                    "name" => "ilgili_firma", 
+                    "class" => "select2-post",
+                    "data-ajax--url" => base_url('yerlesim/find_select'),
+                    "data-placeholder" => lang("Evrak.table_ilgiliFirma")
+                ]);
+                echo '</div>';
+
+
+
+
+                echo '<div class="mb-3">';
+                echo form_dropdown([
+                    "name" => "ilgili_firma2", 
+                    "class" => "select2-post",
+                    "data-ajax--url" => base_url('yerlesim/find_select'),
+                    "data-placeholder" => lang("Evrak.table_ilgiliFirma2")
+                ]);
+                echo '</div>';
+
+
+
+
+                echo '<div class="mb-3">';
+                echo form_dropdown([
+                    "name" => "ilgili_firma3", 
+                    "class" => "select2-post",
+                    "data-ajax--url" => base_url('yerlesim/find_select'),
+                    "data-placeholder" => lang("Evrak.table_ilgiliFirma3")
+                ]);
+                echo '</div>';
+
+
+
+                echo '<div class="mb-3">';
+                echo form_dropdown([
+                    "name" => "kargo_firma", 
+                    "class" => "select2-post",
+                    "data-ajax--url" => base_url('yerlesim/find_select'),
+                    "data-placeholder" => lang("Evrak.table_kargoFirma")
+                ]);
+                echo '</div>';
+                
+
+                
+
+                echo form_input([
+                    "type" => "text",
+                    "name" => "barkod_no",
+                    "class" => "form-control mb-3",
+                    "placeholder" => lang("Evrak.table_barkodNo")
+                ]);
+
+                echo form_input([
+                    "type" => "text",
+                    "name" => "konu",
+                    "class" => "form-control mb-3",
+                    "required" => true,
+                    "placeholder" => lang("Evrak.table_konu")
+                ]);
+
+                echo form_input([
+                    "type" => "text",
+                    "name" => "arsiv_klasor_bilgi",
+                    "class" => "form-control mb-3",
+                    "placeholder" => lang("Evrak.table_arsivKlasorBilgi")
+                ]);
+
+                echo form_input([
+                    "type" => "file",
+                    "name" => "dosya",
+                    "class" => "mb-3",
+                    "placeholder" => lang("Evrak.select_file")
+                ]);    
+               
+                echo form_button([
+                    "type" => "submit", 
+                    "class" => "btn btn-primary form-control", 
+                    "content" => lang("Evrak.add_button")
+                ]);
+
+                echo form_close(); 
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php $this->endSection(); ?>
 
 
 <?php $this->section("javascript"); ?>

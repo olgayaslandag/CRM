@@ -139,6 +139,17 @@
                             </div>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('kuyu'); ?>">
+                            <div class="d-flex align-items-center">
+                                <span class="nav-link-icon">
+                                    <span class="fas fa-user"></span>
+                                </span>
+                                <span class="nav-link-text"> Kuyu Yönetimi</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -269,6 +280,8 @@
         <div style="zoom: 0.9;">
             <?php $this->renderSection("content"); ?>
         </div>
+
+        <?php $this->renderSection("modals"); ?>
         <footer>
             <div class="row no-gutters justify-content-between fs--1 mt-4 mb-3">
                 <div class="col-12 col-sm-auto text-center">

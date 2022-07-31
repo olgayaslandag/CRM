@@ -47,7 +47,8 @@ class KullaniciModel extends Model
             $builder = $builder->where("eposta", $filter->eposta);
         if(isset($filter->rank))
             $builder = $builder->where("yetki_id", $filter->rank);
-        
+        if(isset($filter->id))
+            $builder = $builder->where("sys_kullanici.id", $filter->id);
         if($this->tempUseSoftDeletes)
             $builder->where($this->table . '.' . $this->deletedField, null);
 

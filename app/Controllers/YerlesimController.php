@@ -13,13 +13,16 @@ class YerlesimController extends BaseController
 
 		$YerlesimModel = new \App\Models\Yerlesim\YerlesimModel();
 		$YerlesimTipModel = new \App\Models\Yerlesim\YerlesimTipModel();
+		$ilModel = new \App\Models\Yerlesim\ilModel();
+
 		$yerlesimler = $YerlesimModel->getAll($filter);
 		$yerlesimTipler = $YerlesimTipModel->findAll();
 
 		$data = [
 			"yerlesimler" => $yerlesimler,
 			"yerlesim_tipleri" => $yerlesimTipler,
-			"filter" => $filter
+			"filter" => $filter,
+			"iller" => $ilModel->findAll()
 		];
 
 		return view("yerlesim/yerlesimler", $data);
@@ -56,7 +59,7 @@ class YerlesimController extends BaseController
 
 		$YerlesimModel = new \App\Models\Yerlesim\YerlesimModel();
 
-		$yerlesim = $YerlesimModel->find($id);
+		$yerlesim = $YerlesimModel->getItem((Object) ["id" => $id]);
 
 		$data = [
 			"status" => $yerlesim ? TRUE : FALSE,

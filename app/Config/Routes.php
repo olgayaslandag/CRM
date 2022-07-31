@@ -35,8 +35,24 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'HomeController::index');
 
+
+
+
+$routes->get('/', 'HomeController::index');
+$routes->get("/ewc_kodlar", "AtikController::ewc_kodlar");
+$routes->post("/ewc_kodlar/import", "AtikController::ewc_import");
+$routes->get('/dashboard', 'DashboardController::index');
+
+
+
+
+
+/*
+ *--------------------------------------------------
+ * Auth Management
+ *--------------------------------------------------
+ */
 $routes->group("/yetki", function($routes){
     $routes->get('giris', 'YetkiController::index', ["as" => "loginView"]);
     $routes->post('giris', 'YetkiController::girisPost', ["as" => "loginAction"]);
@@ -78,12 +94,12 @@ $routes->group("/kullanici", function($routes){
  */
 $routes->group("/atik_kodlar", function($routes){
     $routes->get("/", "AtikController::kodlar");
-    $routes->post("/ekle", "AtikController::ekle");
-    $routes->get("/sil/(:num)", "AtikController::sil/$1");
+    $routes->post("ekle", "AtikController::ekle");
+    $routes->get("sil/(:num)", "AtikController::sil/$1");
 
-    $routes->get("/sevkiyat", "AtikController::sevkiyat");
-    $routes->post("/sevkiyat", "AtikController::sevkiyat_ekle");
-    $routes->get("/sevkiyat/sil/(:num)", "AtikController::sevkiyat_sil/$1");
+    $routes->get("sevkiyat", "AtikController::sevkiyat");
+    $routes->post("sevkiyat", "AtikController::sevkiyat_ekle");
+    $routes->get("sevkiyat/sil/(:num)", "AtikController::sevkiyat_sil/$1");
 });
 
 
@@ -95,8 +111,8 @@ $routes->group("/atik_kodlar", function($routes){
  */
 $routes->group("/birimler", function($routes){
     $routes->get("/", "BirimController::index");
-    $routes->post("/ekle", "BirimController::ekle");
-    $routes->get("/sil/(:num)", "BirimController::sil/$1");    
+    $routes->post("ekle", "BirimController::ekle");
+    $routes->get("sil/(:num)", "BirimController::sil/$1");    
 });
 
 
@@ -109,8 +125,8 @@ $routes->group("/birimler", function($routes){
  */
 $routes->group("/atik_bildirimleri", function($routes){
     $routes->get("/", "AtikController::bildirimler");
-    $routes->post("/ekle", "AtikController::bildirim_ekle");
-    $routes->get("/sil/(:num)", "AtikController::bildirim_sil/$1");
+    $routes->post("ekle", "AtikController::bildirim_ekle");
+    $routes->get("sil/(:num)", "AtikController::bildirim_sil/$1");
 });
 
 
@@ -150,11 +166,20 @@ $routes->group("/yerlesim", function($routes){
 
 
 
+/*
+ *--------------------------------------------------
+ *    Well Managements
+ *--------------------------------------------------
+ */
+$routes->group("/kuyu", function($routes){
+    $routes->get("/", "WellController::index", ["as" => "wellsView"]);
+    $routes->post("ekle", "WellController::ekle", ["as" => "wellsAdd"]);
+    $routes->get("sil/(:num)", "WellController::sil/$1", ["as" => "wellsDelete"]);
+});
 
-$routes->get("/ewc_kodlar", "AtikController::ewc_kodlar");
-$routes->post("/ewc_kodlar/import", "AtikController::ewc_import");
 
-$routes->get('/dashboard', 'DashboardController::index');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

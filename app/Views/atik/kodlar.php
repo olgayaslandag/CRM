@@ -41,64 +41,61 @@
         <?php } ?>
     </div>
 </div>
-
-
-
-
-
-
-<div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical" role="document">
-    <div class="modal-content border-0 min-vh-100">
-      <div class="modal-header">
-        <h5 class="modal-title" id="yeniEkle"><?php echo lang("Atik.formNewCodeTitle"); ?></h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span class="font-weight-light" aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body py-5 text-center">
-        <img class="img-fluid" src="assets/img/illustrations/modal-right.png" alt="">
-        <?php 
-            echo form_open(base_url("atik_kodlar/ekle"), ["method" => "post", "autocomplete" => "off"]);
-            echo form_input([
-                "type" => "hidden", 
-                "name" => "user_id", 
-                "value" => session()->get("id")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "kod", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Atik.theadCode")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "aciklama", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Atik.theadCodeDesc")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "kisa", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Atik.theadCodeShortDesc")
-            ]);
-
-            echo form_button([
-                "type" => "submit", 
-                "class" => "btn btn-primary form-control", 
-                "content" => "Ekle"
-            ]);
-            echo form_close(); 
-        ?>
-      </div>
-    </div>
-  </div>
-</div>
 <?php $this->endSection(); ?>
 
 
+
+<?php $this->section("modals"); ?>
+    <div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-vertical" role="document">
+        <div class="modal-content border-0 min-vh-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yeniEkle"><?php echo lang("Atik.formNewCodeTitle"); ?></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span class="font-weight-light" aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body py-5 text-center">
+            <img class="img-fluid" src="assets/img/illustrations/modal-right.png" alt="">
+            <?php 
+                echo form_open(base_url("atik_kodlar/ekle"), ["method" => "post", "autocomplete" => "off"]);
+                echo form_input([
+                    "type" => "hidden", 
+                    "name" => "user_id", 
+                    "value" => session()->get("id")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "kod", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Atik.theadCode")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "aciklama", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Atik.theadCodeDesc")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "kisa", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Atik.theadCodeShortDesc")
+                ]);
+
+                echo form_button([
+                    "type" => "submit", 
+                    "class" => "btn btn-primary form-control", 
+                    "content" => "Ekle"
+                ]);
+                echo form_close(); 
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php $this->endSection(); ?>
 
 <?php $this->section("javascript"); ?>
 <script>

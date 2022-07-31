@@ -52,7 +52,7 @@ class KullaniciController extends BaseController
 	public function getir($id)
 	{
 
-    	$kullanici = $this->KullaniciModel->getAll($id);
+    	$kullanici = $this->KullaniciModel->getAll((Object) ["id" => $id]);
 
     	$data = [
     		"status" => $kullanici ? true : false,

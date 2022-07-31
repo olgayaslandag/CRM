@@ -47,8 +47,10 @@
 
     </div>
 </div>
+<?php $this->endSection(); ?>
 
 
+<?php $this->section("modals"); ?>
 
 <div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-vertical" role="document">
@@ -121,8 +123,8 @@
     </div>
   </div>
 </div>
-<?php $this->endSection(); ?>
 
+<?php $this->endSection(); ?>
 
 
 <?php $this->section("javascript"); ?>

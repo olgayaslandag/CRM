@@ -82,6 +82,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th><?php echo lang("Yerlesim.table_unvan"); ?></th>
                         <th><?php echo lang("Yerlesim.table_tel"); ?></th>
                         <th><?php echo lang("Yerlesim.table_eposta"); ?></th>
@@ -94,6 +95,7 @@
                 <tbody>
                     <?php foreach($yerlesimler as $yerlesim){?>
                     <tr>
+                        <td><?php echo $yerlesim->id; ?></td>
                         <td><?php echo $yerlesim->unvan; ?></td>
                         <td><?php echo $yerlesim->tel; ?></td>
                         <td><?php echo $yerlesim->eposta; ?></td>
@@ -115,131 +117,133 @@
         </div>
     </div>
 </div>
+<?php $this->endSection(); ?>
 
 
 
-<div class="modal modal-fixed-right fade" id="detay" tabindex="-1" role="dialog" aria-labelledby="detay" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical" role="document">
-    <div class="modal-content border-0 min-vh-100">
-      <div class="modal-header">
-        <h5 class="modal-title" id="detay"><?php echo lang("Yerlesim.detail_title"); ?></h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span class="font-weight-light" aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body p-0">
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-<div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-vertical" role="document">
-    <div class="modal-content border-0 min-vh-100">
-      <div class="modal-header">
-        <h5 class="modal-title" id="yeniEkle"><?php echo lang("Yerlesim.new_form_title"); ?></h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span class="font-weight-light" aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body py-5 text-center">
-        <img class="img-fluid" src="<?php echo site_url('assets/img/illustrations/modal-right.png'); ?>" alt="">
-        <?php 
-            echo form_open(base_url("yerlesim/ekle"), ["method" => "post", "autocomplete" => "off"]);
-            echo form_input([
-                "type" => "hidden", 
-                "name" => "ekleyen_id", 
-                "value" => session()->get("id")
-            ]);
-        ?>
-        <select class="form-control mb-3" name="yerlesim_tip">
-            <option value=""><?php echo lang("Yerlesim.table_yerlesim_tip"); ?></option>
-            <?php foreach($yerlesim_tipleri as $tip){
-                echo "<option value='".$tip->id."'>".$tip->tanim."</option>";
-            } ?>
-        </select>
-        <?php 
-            echo form_input([
-                "type" => "text", 
-                "name" => "unvan", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_unvan")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "adres", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_adres")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "tel", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_tel")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "faks", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_faks")
-            ]);
-
-            echo form_input([
-                "type" => "email", 
-                "name" => "eposta", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_eposta")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "vergi_daire", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_vergi_daire")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "vergi_no", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_vergi_no")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "il_id", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_il_id")
-            ]);
-
-            echo form_input([
-                "type" => "text", 
-                "name" => "ilce_id", 
-                "class" => "form-control mb-3", 
-                "placeholder" => lang("Yerlesim.table_ilce_id")
-            ]);
-
-
-
-
-
-
-
-
-            echo form_button([
-                "type" => "submit", 
-                "class" => "btn btn-primary form-control", 
-                "content" => lang("Sevkiyat.add_button")
-            ]);
-            echo form_close(); 
-        ?>
+<?php $this->section("modals"); ?>
+    <div class="modal modal-fixed-right fade" id="detay" tabindex="-1" role="dialog" aria-labelledby="detay" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-vertical" role="document">
+        <div class="modal-content border-0 min-vh-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detay"><?php echo lang("Yerlesim.detail_title"); ?></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span class="font-weight-light" aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body p-0">
+            
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+
+
+
+    <div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-vertical" role="document">
+        <div class="modal-content border-0 min-vh-100">
+          <div class="modal-header">
+            <h5 class="modal-title" id="yeniEkle"><?php echo lang("Yerlesim.new_form_title"); ?></h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span class="font-weight-light" aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body py-5 text-center">
+            <img class="img-fluid" src="<?php echo site_url('assets/img/illustrations/modal-right.png'); ?>" alt="">
+            <?php 
+                echo form_open(base_url("yerlesim/ekle"), ["method" => "post", "autocomplete" => "off"]);
+                echo form_input([
+                    "type" => "hidden", 
+                    "name" => "ekleyen_id", 
+                    "value" => session()->get("id")
+                ]);
+            ?>
+            <select class="form-control mb-3" name="yerlesim_tip">
+                <option value=""><?php echo lang("Yerlesim.table_yerlesim_tip"); ?></option>
+                <?php foreach($yerlesim_tipleri as $tip){
+                    echo "<option value='".$tip->id."'>".$tip->tanim."</option>";
+                } ?>
+            </select>
+            <?php 
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "unvan", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_unvan")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "adres", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_adres")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "tel", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_tel")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "faks", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_faks")
+                ]);
+
+                echo form_input([
+                    "type" => "email", 
+                    "name" => "eposta", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_eposta")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "vergi_daire", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_vergi_daire")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "vergi_no", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_vergi_no")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "il_id", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_il_id")
+                ]);
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "ilce_id", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Yerlesim.table_ilce_id")
+                ]);
+
+
+
+
+
+
+
+
+                echo form_button([
+                    "type" => "submit", 
+                    "class" => "btn btn-primary form-control", 
+                    "content" => lang("Sevkiyat.add_button")
+                ]);
+                echo form_close(); 
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
 <?php $this->endSection(); ?>
 
 
@@ -277,6 +281,8 @@ $(function(){
         $.get( url + id, function( data ) {
             var content = "";
             if(data.status){
+                data.result = data.result[0];
+
                 content = '<div class="table-responsive">\
                 <table class="table">\
                     <tr>\
@@ -313,7 +319,7 @@ $(function(){
                     </tr>\
                     <tr>\
                         <th><?php echo lang("Yerlesim.table_il_id"); ?></th>\
-                        <td>' + data.result.il_id + '</td>\
+                        <td>' + data.result.il_adi + '</td>\
                     </tr>\
                     <tr>\
                         <th><?php echo lang("Yerlesim.table_ilce_id"); ?></th>\
