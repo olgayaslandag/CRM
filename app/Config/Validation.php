@@ -56,4 +56,9 @@ class Validation extends BaseConfig
         "ekleyen_id" => "required",
         "yerlesim_id" => "required"
     ];
+
+    public $login = [
+        "eposta" => "required|valid_email|is_not_unique[sys_kullanici.eposta]",
+        "sifre"  => "required|min_length[8]|max_length[10]"
+    ];
 }

@@ -1,7 +1,8 @@
 <?php $this->extend("layouts/auth"); ?>
 
-<?php $this->section("content"); ?>
+<?php $validation = session()->getFlashData("validation"); ?>
 
+<?php $this->section("content"); ?>
 <?php echo form_open('', ["method" => "post"]); ?>
   <div class="form-group">
     <div class="d-flex justify-content-between">
@@ -15,11 +16,12 @@
       "id" => "split-login-email",
       "type" => "email",
       "name" => "eposta",
-
+      "value" => old("eposta"),
+      "required" => true,
     ]); ?>
-    <span class="text-danger"><?php echo isset($validation["eposta"]) ? $validation["eposta"] : null; ?></span>
+    <small class="text-danger"><?php echo isset($validation["eposta"]) ? $validation["eposta"] : null; ?></small>
   </div>
-  
+
   <div class="form-group">
     <div class="d-flex justify-content-between">
       <label for="split-login-password">Şifre</label>
@@ -32,9 +34,10 @@
       "id" => "split-login-password",
       "type" => "password",
       "name" => "sifre",
-      "required" => true
+      "required" => true,
+      "value" => old("sifre")
     ]); ?>
-    <span class="text-danger"><?php echo isset($validation["sifre"]) ? $validation["sifre"] : null; ?></span>
+    <small class="text-danger"><?php echo isset($validation["sifre"]) ? $validation["sifre"] : null; ?></small>
   </div>
 
   <div class="custom-control custom-checkbox">

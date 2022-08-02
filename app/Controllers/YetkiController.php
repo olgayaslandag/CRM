@@ -3,20 +3,20 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
-use App\Entities\UserEntity;
+use App\Models\Kullanici\KullaniciModel;
+use App\Entities\Kullanici\KullaniciEntity;
 
 class YetkiController extends BaseController
 {
 
-	protected UserModel $UserModel;
-	protected UserEntity $UserEntity;
+	protected $UserModel;
+	protected $UserEntity;
 
 	public function __construct()
 	{
 
-		$this->UserModel = new UserModel();
-		$this->UserEntity = new UserEntity();
+		$this->UserModel = new KullaniciModel();
+		$this->UserEntity = new KullaniciEntity();
 
 	}
 
@@ -28,35 +28,45 @@ class YetkiController extends BaseController
 
     public function girisPost()
     {
+        /*
+        *--------------------------------------------------
+        *    Clear special codes from POST
+        *--------------------------------------------------
+        */
+        $posts = removeHtml($this->request->getPost());
 
-        $validation = $this->validate([
-            "eposta" => "required|valid_email",
-            "sifre"  => "required|min_length[8]|max_length[10]"
-        ]);
 
-        if(!$validation){
-            $data = ["validation" => $this->validator->getErrors()];
-            return view("yetki/login", $data);
+
+
+
+        /*
+         *--------------------------------------------------
+         *    Check validation inputs
+         *--------------------------------------------------
+         */
+        $validation = \Config\Services::validation();
+        if(!$validation->run($posts, 'login')){
+            return redirect()->back()->withInput()->with('validation', $validation->getErrors()); 
         }
 
 
 
 
-
-    	$posts = (Object) $this->request->getPost();
-
-    	$user = $this->UserModel->where(["eposta" => $posts->eposta])->first();
+        /*
+         *--------------------------------------------------
+         *    Find the user and proccess other actions
+         *--------------------------------------------------
+         */
+    	$user = $this->UserModel->where(["eposta" => $posts["eposta"]])->first();
     	if(!$user){
 
-    		session()->set(["status" => false, "message" => "Sistemde kayıtlı kullanıcı bulunamadı!"]);
-    		return redirect()->back();
+    		return redirect()->back()->withInput()->with("validation", ["eposta" => "Sistemde kayıtlı kullanıcı bulunamdı!"]);
 
     	} else {
 
-    		if(!password_verify($posts->sifre, $user->sifre)) {
+    		if(!password_verify($posts["sifre"], $user->sifre)) {
 
-    			session()->set(["status" => false, "message" => "Şifre doğru değil!"]);
-    			return redirect()->back();
+    			return redirect()->back()->with("validation", ["sifre" => "Şifre doğru değil!"]);
 
     		}else{
 
@@ -71,7 +81,6 @@ class YetkiController extends BaseController
     		}
 
     	}
-    	//return $this->response->setJSON($epostaBul);
 
     }
 
