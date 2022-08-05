@@ -41,7 +41,7 @@
                 <tbody>
                     <?php foreach($ewc_kodlar as $ewc){?>
                     <tr>
-                        <td><?php echo $ewc->atik_kod_id; ?></td>
+                        <td><?php echo $ewc->kod; ?></td>
                         <td><?php echo $ewc->aciklama; ?></td>
                         <td><?php echo $ewc->kisa; ?></td>
                         <td><?php echo $ewc->sinif; ?></td>
@@ -74,14 +74,13 @@
                     "name" => "user_id", 
                     "value" => session()->get("id")
                 ]);
-            ?>
-            <select name="kod" class="form-control mb-3">
-                <option value=""><?php echo lang("Ewc.table_code"); ?></option>
-                <?php foreach($atik_kodlar as $kod){
-                    echo "<option value='".$kod->id."'>".$kod->kisa."</option>";
-                }?>
-            </select>
-            <?php
+
+                echo form_input([
+                    "type" => "text", 
+                    "name" => "kod", 
+                    "class" => "form-control mb-3", 
+                    "placeholder" => lang("Ewc.table_code")
+                ]);
 
                 echo form_input([
                     "type" => "text", 

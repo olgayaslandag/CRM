@@ -7,7 +7,7 @@ use CodeIgniter\Entity\Entity;
 class EwcEntity extends Entity {
 
 	protected $id;
-	protected $atik_kod_id;
+	protected $kod;
 	protected $aciklama;
 	protected $kisa;
 	protected $sinif;

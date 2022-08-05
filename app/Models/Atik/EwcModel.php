@@ -15,7 +15,7 @@ class EwcModel extends Model
     protected $returnType     = \App\Entities\Atik\EwcEntity::class;
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['atik_kod_id', 'aciklama', 'kisa', 'sinif', 'birim_id', 'ekleyen_id', 'guncelleyen_id'];
+    protected $allowedFields = ['aciklama', 'kisa', 'sinif', 'birim_id', 'ekleyen_id', 'guncelleyen_id'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'ekleme_tarihi';

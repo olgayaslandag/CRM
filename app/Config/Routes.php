@@ -40,8 +40,6 @@ $routes->set404Override();
 
 
 $routes->get('/', 'HomeController::index');
-$routes->get("/ewc_kodlar", "AtikController::ewc_kodlar");
-$routes->post("/ewc_kodlar/import", "AtikController::ewc_import");
 $routes->get('/dashboard', 'DashboardController::index');
 
 
@@ -95,6 +93,18 @@ $routes->group("/kullanici", function($routes){
 $routes->group("/atik_kodlar", function($routes){
     $routes->get("/", "AtikController::kodlar");
     $routes->post("ekle", "AtikController::ekle");
+    $routes->get("sil/(:num)", "AtikController::sil/$1");
+
+    $routes->get("sevkiyat", "AtikController::sevkiyat");
+    $routes->post("sevkiyat", "AtikController::sevkiyat_ekle");
+    $routes->get("sevkiyat/sil/(:num)", "AtikController::sevkiyat_sil/$1");
+});
+
+$routes->group("/ewc_kodlar", function($routes){
+    $routes->get("/", "AtikController::ewc_kodlar", ["as" => "ewc_kodlar"]);
+    $routes->post("ekle", "AtikController::ewc_kod_ekle");
+
+
     $routes->get("sil/(:num)", "AtikController::sil/$1");
 
     $routes->get("sevkiyat", "AtikController::sevkiyat");

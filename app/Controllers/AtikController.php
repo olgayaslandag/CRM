@@ -81,7 +81,7 @@ class AtikController extends BaseController
         $entity->guncelleyen_id = $posts["user_id"];
 
         $AtikKodModel->save($entity);
-        return redirect()->route('atik_kodlar'); exit;
+        return redirect()->route('atik_kodlar');
 
     }
 
@@ -237,6 +237,28 @@ class AtikController extends BaseController
 
         return view("atik/ewc_kodlar", $data);
 
+    }
+
+    public function ewc_kod_ekle()
+    {
+        $EWCModel = new \App\Models\Atik\EwcModel(); 
+
+        $posts = $this->request->getPost();
+        foreach($posts as $k=>$v){
+            $posts[$k] = inputRemoveTag($v);
+        }
+
+        $entity = new AtikKodEntity();
+        $entity->kod            = $posts["kod"];
+        $entity->aciklama       = $posts["aciklama"];
+        $entity->kisa           = $posts["kisa"];
+        $entity->sinif           = $posts["sinif"];
+        $entity->birim           = $posts["birim"];
+        $entity->ekleyen_id     = $posts["user_id"];
+        $entity->guncelleyen_id = $posts["user_id"];
+
+        $EWCModel->save($entity);
+        return redirect()->route('ewc_kodlar'); exit;
     }
 
     public function ewc_import()
