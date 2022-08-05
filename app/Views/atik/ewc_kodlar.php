@@ -46,6 +46,11 @@
                         <td><?php echo $ewc->kisa; ?></td>
                         <td><?php echo $ewc->sinif; ?></td>
                         <td><?php echo $ewc->birim_id; ?></td>
+                        <td>
+                            <a href="<?php echo base_url(route_to("ewc_sil", $ewc->id )); ?>" class="btn btn-danger btn-sm sil">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
                     </tr>
                     <?php } ?>
                 </tbody>

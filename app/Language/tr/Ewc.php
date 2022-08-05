@@ -17,4 +17,8 @@ return [
 	"table_birim" => "Birim",
 
 
+    "remove_success" => "Atık kodu başarıyla silindi.",
+    "remove_error" => "Atık kodu silinemedi! Daha sonra tekrar denemelisiniz!",
+
+
 ];

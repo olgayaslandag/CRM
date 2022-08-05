@@ -38,7 +38,7 @@
                             <td><?php echo $sevkiyat->motat; ?></td>
                             <td><?php echo $sevkiyat->km; ?></td>
                             <td>
-                            <a href="<?php echo base_url("/atik_kodlar/sevkiyat/sil/". $sevkiyat->id); ?>" class="btn btn-danger btn-sm sil">
+                            <a href="<?php echo base_url(route_to("sevkiyatSil", $sevkiyat->id)); ?>" class="btn btn-danger btn-sm sil">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
@@ -63,7 +63,7 @@
           <div class="modal-body py-5 text-center">
             <img class="img-fluid" src="<?php echo site_url('assets/img/illustrations/modal-right.png'); ?>" alt="">
             <?php 
-                echo form_open(base_url("atik_kodlar/sevkiyat"), ["method" => "post", "autocomplete" => "off"]);
+                echo form_open(base_url(route_to("sevkiyatEkle")), ["method" => "post", "autocomplete" => "off"]);
                 echo form_input([
                     "type" => "hidden", 
                     "name" => "user_id", 

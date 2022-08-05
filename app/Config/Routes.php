@@ -90,26 +90,17 @@ $routes->group("/kullanici", function($routes){
  * Waste Codes
  * --------------------------------------------------------------------
  */
-$routes->group("/atik_kodlar", function($routes){
-    $routes->get("/", "AtikController::kodlar");
-    $routes->post("ekle", "AtikController::ekle");
-    $routes->get("sil/(:num)", "AtikController::sil/$1");
-
-    $routes->get("sevkiyat", "AtikController::sevkiyat");
-    $routes->post("sevkiyat", "AtikController::sevkiyat_ekle");
-    $routes->get("sevkiyat/sil/(:num)", "AtikController::sevkiyat_sil/$1");
+$routes->group("/ewc_kodlar", function($routes){
+    $routes->get("/", "\App\Controllers\Atik\EwcController::index", ["as" => "ewc_kodlar"]);
+    $routes->post("ekle", "\App\Controllers\Atik\EwcController::ekle", ["as" => "ewcEkle"]);
+    $routes->get("sil/(:num)", "\App\Controllers\Atik\EwcController::sil/$1", ["as" => "ewc_sil"]);
 });
 
-$routes->group("/ewc_kodlar", function($routes){
-    $routes->get("/", "AtikController::ewc_kodlar", ["as" => "ewc_kodlar"]);
-    $routes->post("ekle", "AtikController::ewc_kod_ekle");
 
-
-    $routes->get("sil/(:num)", "AtikController::sil/$1");
-
-    $routes->get("sevkiyat", "AtikController::sevkiyat");
-    $routes->post("sevkiyat", "AtikController::sevkiyat_ekle");
-    $routes->get("sevkiyat/sil/(:num)", "AtikController::sevkiyat_sil/$1");
+$routes->group("/sevkiyatlar", function($routes){
+    $routes->get("/", "\App\Controllers\Sevkiyat\SevkiyatController::index", ["as" => "sevkiyatlarView"]);
+    $routes->post("ekle", "\App\Controllers\Sevkiyat\SevkiyatController::ekle", ["as" => "sevkiyatEkle"]);
+    $routes->get("sil/(:num)", "\App\Controllers\Sevkiyat\SevkiyatController::sil/$1", ["as" => "sevkiyatSil"]);
 });
 
 
@@ -120,9 +111,9 @@ $routes->group("/ewc_kodlar", function($routes){
  * --------------------------------------------------------------------
  */
 $routes->group("/birimler", function($routes){
-    $routes->get("/", "BirimController::index");
-    $routes->post("ekle", "BirimController::ekle");
-    $routes->get("sil/(:num)", "BirimController::sil/$1");    
+    $routes->get("/", "\App\Controllers\Birim\BirimController::index", ["as" => "birimlerView"]);
+    $routes->post("ekle", "\App\Controllers\Birim\BirimController::ekle", ["as" => "birimAdd"]);
+    $routes->get("sil/(:num)", "\App\Controllers\Birim\BirimController::sil/$1", ["as" => "birimRemove"]);
 });
 
 
@@ -134,9 +125,9 @@ $routes->group("/birimler", function($routes){
  * --------------------------------------------------------------------
  */
 $routes->group("/atik_bildirimleri", function($routes){
-    $routes->get("/", "AtikController::bildirimler");
-    $routes->post("ekle", "AtikController::bildirim_ekle");
-    $routes->get("sil/(:num)", "AtikController::bildirim_sil/$1");
+    $routes->get("/", "\App\Controllers\Bildirim\BildirimController::index", ["as" => "atik_bildirimleri"]);
+    $routes->post("ekle", "\App\Controllers\Bildirim\BildirimController::ekle");
+    $routes->get("sil/(:num)", "\App\Controllers\Bildirim\BildirimController::sil/$1");
 });
 
 
@@ -148,12 +139,12 @@ $routes->group("/atik_bildirimleri", function($routes){
  * --------------------------------------------------------------------
  */
 $routes->group("/evrak", function($routes){
-    $routes->get("gelen", "EvrakController::gelenler");
-    $routes->post("gelen_ekle", "EvrakController::gelen_ekle");
-    $routes->get("gelen_sil/(:num)", "EvrakController::gelen_sil/$1");
-    $routes->get("gelen_detay/(:num)", "EvrakController::gelen_detay/$1");
+    $routes->get("gelen", "\App\Controllers\Evrak\GelenController::index", ["as" => "gelenlerView"]);
+    $routes->post("gelen_ekle", "\App\Controllers\Evrak\GelenController::ekle", ["as" => "gelenEkle"]);
+    $routes->get("gelen_sil/(:num)", "\App\Controllers\Evrak\GelenController::sil/$1", ["as" => "gelenSil"]);
+    $routes->get("gelen_detay/(:num)", "\App\Controllers\Evrak\GelenController::detay/$1", ["as" => "gelenDetail"]);
 
-    $routes->get("giden", "EvrakController::gidenler");
+    $routes->get("giden", "\App\Controllers\Evrak\GidenController::index", ["as" => "gidenlerView"]);
 });
 
 

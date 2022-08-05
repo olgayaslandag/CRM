@@ -86,7 +86,7 @@
                             <button id="<?php echo $evrak->evrak_id; ?>" class="btn btn-primary btn-sm detail" data-toggle="modal" data-target="#detay">
                                 <i class="fa fa-info"></i>
                             </button>
-                            <a href="<?php echo base_url("evrak/gelen_sil/". $evrak->evrak_id); ?>" class="btn btn-danger btn-sm sil">
+                            <a href="<?php echo base_url(route_to("gelenSil", $evrak->evrak_id)); ?>" class="btn btn-danger btn-sm sil">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>

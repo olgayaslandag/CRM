@@ -73,23 +73,20 @@
                         </a>
                         <ul class="nav collapse" id="home" data-parent="#navbarVerticalCollapse">
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('atik_kodlar'); ?>">Atık Kodları</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('atik_kodlar/sevkiyat'); ?>">Atık Sevkiyatı</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('atik_bildirimleri'); ?>">Atık Bildirimleri</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="<?php echo base_url('ewc_kodlar'); ?>">EWC Atık Kodları</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo base_url(route_to("atik_bildirimleri")); ?>">Atık Bildirimleri</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo base_url(route_to("sevkiyatlarView")); ?>">Atık Sevkiyatı</a>
                             </li>
                         </ul>
                     </li>
                     
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('birimler'); ?>">
+                        <a class="nav-link" href="<?php echo base_url(route_to("birimlerView")); ?>">
                             <div class="d-flex align-items-center">
                                 <span class="nav-link-icon">
                                     <span class="fas fa-home"></span>
@@ -110,10 +107,10 @@
                         </a>
                         <ul class="nav collapse" id="evrak" data-parent="#navbarVerticalCollapse">
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('evrak/gelen'); ?>">Gelen Evraklar</a>
+                                <a class="nav-link" href="<?php echo base_url(route_to("gelenlerView")); ?>">Gelen Evraklar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url('evrak/giden'); ?>">Giden Evraklar</a>
+                                <a class="nav-link" href="<?php echo base_url(route_to("gidenlerView")); ?>">Giden Evraklar</a>
                             </li>
                         </ul>
                     </li>
