@@ -52,13 +52,13 @@ $routes->get('/dashboard', 'DashboardController::index');
  *--------------------------------------------------
  */
 $routes->group("/yetki", function($routes){
-    $routes->get('giris', 'YetkiController::index', ["as" => "loginView"]);
-    $routes->post('giris', 'YetkiController::girisPost', ["as" => "loginAction"]);
-    $routes->post('ekle', 'YetkiController::kullaniciEkle', ["as" => "userAdd"]);
-    $routes->get('kayit', 'YetkiController::kayit', ["as" => "registerView"]);
-    $routes->get('sifremi_unuttum', 'YetkiController::sifremi_unuttum', ["as" => "rememberView"]);
-    $routes->post('sifremi_unuttum', 'YetkiController::remember_action', ["as" => "rememberAction"]);
-    $routes->get('cikis', 'YetkiController::cikis', ["as" => "logoutAction"]);
+    $routes->get('giris', '\App\Controllers\Yetki\YetkiController::index', ["as" => "loginView"]);
+    $routes->post('giris', '\App\Controllers\Yetki\YetkiController::girisPost', ["as" => "loginAction"]);
+    $routes->post('ekle', '\App\Controllers\Yetki\YetkiController::kullaniciEkle', ["as" => "userAdd"]);
+    $routes->get('kayit', '\App\Controllers\Yetki\YetkiController::kayit', ["as" => "registerView"]);
+    $routes->get('sifremi_unuttum', '\App\Controllers\Yetki\YetkiController::sifremi_unuttum', ["as" => "rememberView"]);
+    $routes->post('sifremi_unuttum', '\App\Controllers\Yetki\YetkiController::remember_action', ["as" => "rememberAction"]);
+    $routes->get('cikis', '\App\Controllers\Yetki\YetkiController::cikis', ["as" => "logoutAction"]);
 });
 
 
@@ -76,10 +76,10 @@ $routes->group("/yetki", function($routes){
  * --------------------------------------------------------------------
  */
 $routes->group("/kullanici", function($routes){
-    $routes->get("/", "KullaniciController::index");
-    $routes->get("sil/(:num)", "KullaniciController::delete/$1");
-    $routes->get("getir/(:num)", "KullaniciController::getir/$1");
-    $routes->post("ekle", "KullaniciController::add");
+    $routes->get("/", "\App\Controllers\Kullanici\KullaniciController::index", ["as" => "KullaniciView"]);
+    $routes->get("sil/(:num)", "\App\Controllers\Kullanici\KullaniciController::delete/$1");
+    $routes->get("getir/(:num)", "\App\Controllers\Kullanici\KullaniciController::getir/$1");
+    $routes->post("ekle", "\App\Controllers\Kullanici\KullaniciController::add");
 });
 
 
@@ -156,11 +156,11 @@ $routes->group("/evrak", function($routes){
  * --------------------------------------------------------------------
  */
 $routes->group("/yerlesim", function($routes){
-    $routes->get("/", "YerlesimController::index");
-    $routes->post("ekle", "YerlesimController::ekle");
-    $routes->get("getir/(:num)", "YerlesimController::getir/$1");
-    $routes->get("sil/(:num)", "YerlesimController::delete/$1");
-    $routes->get("find_select", "YerlesimController::find_select");
+    $routes->get("/", "\App\Controllers\Yerlesim\YerlesimController::index");
+    $routes->post("ekle", "\App\Controllers\Yerlesim\YerlesimController::ekle");
+    $routes->get("getir/(:num)", "\App\Controllers\Yerlesim\YerlesimController::getir/$1");
+    $routes->get("sil/(:num)", "\App\Controllers\Yerlesim\YerlesimController::delete/$1");
+    $routes->get("find_select", "\App\Controllers\Yerlesim\YerlesimController::find_select");
 });
 
 
@@ -173,9 +173,9 @@ $routes->group("/yerlesim", function($routes){
  *--------------------------------------------------
  */
 $routes->group("/kuyu", function($routes){
-    $routes->get("/", "WellController::index", ["as" => "wellsView"]);
-    $routes->post("ekle", "WellController::ekle", ["as" => "wellsAdd"]);
-    $routes->get("sil/(:num)", "WellController::sil/$1", ["as" => "wellsDelete"]);
+    $routes->get("/", "\App\Controllers\Kuyu\KuyuController::index", ["as" => "wellsView"]);
+    $routes->post("ekle", "\App\Controllers\Kuyu\KuyuController::ekle", ["as" => "wellsAdd"]);
+    $routes->get("sil/(:num)", "\App\Controllers\Kuyu\KuyuController::sil/$1", ["as" => "wellsDelete"]);
 });
 
 
