@@ -22,11 +22,19 @@ class KullaniciEntity extends Entity {
 
 	protected $dates = ["ekleme_tarihi", "guncelleme_tarihi", "silme_tarihi"];
 
+    public function __construct(?array $data = null)
+    {
+        parent::__construct($data);
+        if(isset($data["sifre"]))
+            $this->attributes['sifre'] = password_hash($data["sifre"], PASSWORD_DEFAULT);
+    }
+
 	public function setPassword(string $sifre)
     {
         $this->attributes['sifre'] = password_hash($sifre, PASSWORD_DEFAULT);
-
         return $this;
     }
+
+
 
 }

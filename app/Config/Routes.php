@@ -80,6 +80,9 @@ $routes->group("/kullanici", function($routes){
     $routes->get("sil/(:num)", "\App\Controllers\Kullanici\KullaniciController::delete/$1");
     $routes->get("getir/(:num)", "\App\Controllers\Kullanici\KullaniciController::getir/$1");
     $routes->post("ekle", "\App\Controllers\Kullanici\KullaniciController::add");
+    $routes->get("duzenle/(:num)", "\App\Controllers\Kullanici\KullaniciController::editView/$1", ["as" => "editView"]);
+    $routes->post("duzenle", "\App\Controllers\Kullanici\KullaniciController::editAction", ["as" => "editAction"]);
+
 });
 
 

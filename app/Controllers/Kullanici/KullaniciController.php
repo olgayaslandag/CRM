@@ -54,6 +54,8 @@ class KullaniciController extends BaseController
 
         $kullanici = $this->KullaniciModel->getAll((Object) ["id" => $id]);
 
+        $kullanici[0]->link = '<a href="'.url_to('editView', $id).'" class="btn btn-primary">Düzenle</a>';
+
         $data = [
             "status" => $kullanici ? true : false,
             "result" => $kullanici ? $kullanici[0] : null,
@@ -91,4 +93,40 @@ class KullaniciController extends BaseController
 
     }
 
+    public function editView($id)
+    {
+        $kullanici = $this->KullaniciModel->find($id);
+        if(!$kullanici){
+            bilgiOlustur(["status" => FALSE, "message" => lang("Kullanici.user_not_found")]);
+            return redirect()->route("KullaniciView");
+        }
+
+        $yetkiler = $this->YetkiModel->findAll();
+
+        return view("kullanici/kullanici_edit", [
+            "yetkiler" => $yetkiler,
+            "kullanici" => $kullanici
+        ]);
+    }
+
+    public function editAction()
+    {
+        $validation = \Config\Services::validation();
+
+        if(!$validation->run($this->request->getPost(), 'userUpdate')){
+            //session()->set(["status" => false, "message" => $validation->getErrors()]);
+            return redirect()->back()->withInput()->with('validation', $validation->getErrors());
+        }
+
+
+
+        $entity = new \App\Entities\Kullanici\KullaniciEntity($this->request->getPost());
+        if($this->KullaniciModel->save($entity)){
+            bilgiOlustur(["status" => TRUE, "message" => lang("Kullanici.update_success")]);
+        }else{
+            bilgiOlustur(["status" => FALSE, "message" => lang("Kullanici.update_error")]);
+        }
+
+        return redirect()->back();
+    }
 }

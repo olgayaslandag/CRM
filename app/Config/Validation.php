@@ -61,4 +61,13 @@ class Validation extends BaseConfig
         "eposta" => "required|valid_email|is_not_unique[sys_kullanici.eposta]",
         "sifre"  => "required|min_length[8]|max_length[10]"
     ];
+
+    public $userUpdate = [
+        "adsoyad" => "required",
+        "telefon" => "required|numeric",
+        "yetki_id" => "required|integer",
+        "aktif" => "required|integer",
+        "eposta" => "required|valid_email|is_unique[sys_kullanici.eposta,id,{id}]",
+        "sifre"  => "min_length[8]|max_length[10]|permit_empty"
+    ];
 }

@@ -237,7 +237,7 @@ $(function(){
                             </tr>\
                         </thead>\
                     </table>\
-                </div>'
+                </div> <div class="text-center">' + data.result.link + '</div>'
             }
             $("#detay .modal-body").html(content)
         });
