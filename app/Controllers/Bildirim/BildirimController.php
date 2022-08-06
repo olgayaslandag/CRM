@@ -52,7 +52,7 @@ class BildirimController extends BaseController
         $entity->ekleyen_id = $posts["user_id"];
         $entity->guncelleyen_id = $posts["user_id"];
 
-        $id = $this->AtikBildirimModel->save($entity);
+        $id = $this->BildirimModel->save($entity);
 
         if($id){
             bilgiOlustur(["status" => TRUE, "message" => lang("AtikBildirim.add_success")]);

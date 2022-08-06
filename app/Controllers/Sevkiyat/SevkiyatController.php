@@ -5,6 +5,7 @@ namespace App\Controllers\Sevkiyat;
 use App\Controllers\BaseController;
 use App\Entities\Atik\SevkiyatEntity;
 
+use App\Models\Atik\AtikBildirimModel;
 use App\Models\Atik\AtikKodModel;
 use App\Models\Atik\SevkiyatModel;
 
@@ -12,23 +13,25 @@ class SevkiyatController extends BaseController
 {
     protected $AtikKodModel;
     protected $SevkiyatModel;
+    protected $BildirimModel;
 
     public function __construct()
     {
         $this->AtikKodModel = new AtikKodModel();
         $this->SevkiyatModel = new SevkiyatModel();
+        $this->BildirimModel = new AtikBildirimModel();
     }
 
     public function index()
     {
         $atik_kodlar = $this->AtikKodModel->findAll();
         $sevkiyatlar = $this->SevkiyatModel->getAll();
-
+        $bildirimler = $this->BildirimModel->getInSevkiyat();
         $data = [
             "kodlar" => $atik_kodlar,
-            "sevkiyatlar" => $sevkiyatlar
+            "sevkiyatlar" => $sevkiyatlar,
+            "bildirimler" => $bildirimler
         ];
-
         return view("atik/sevkiyat", $data);
     }
 

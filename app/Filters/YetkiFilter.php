@@ -13,7 +13,7 @@ class YetkiFilter implements FilterInterface
         $router = service('router'); 
         $controller  = $router->controllerName();
 
-        if($controller == "\App\Controllers\YetkiController"){
+        if($controller == "\App\Controllers\Yetki\YetkiController"){
             
             if(session()->get("login")){
                 if($router->methodName() != "cikis"){

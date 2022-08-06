@@ -7,6 +7,7 @@ use CodeIgniter\Entity\Entity;
 class AtikBildirimEntity extends Entity {
 
 	protected $id;
+    protected $yerlesim_id;
 	protected $atik_kod;
 	protected $aciklama;
 	protected $birim;

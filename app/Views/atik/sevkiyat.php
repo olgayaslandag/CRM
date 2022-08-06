@@ -53,7 +53,7 @@
 
 
 <?php $this->section("modals"); ?>
-    <div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true">
+    <div class="modal modal-fixed-right fade" id="yeniEkle" tabindex="-1" role="dialog" aria-labelledby="yeniEkle" aria-hidden="true" data-focus="false">
       <div class="modal-dialog modal-dialog-vertical" role="document">
         <div class="modal-content border-0 min-vh-100">
           <div class="modal-header">
@@ -70,12 +70,23 @@
                     "value" => session()->get("id")
                 ]);
             ?>
-                <select class="form-control mb-3 select2" name="kod">
+              <div class="mb-3">
+                  <select class="form-control select2" name="kod">
+                      <option value="">Bildirim</option>
+                      <?php foreach($bildirimler as $k){
+                          echo "<option value='".$k->id."'>".$k->id."-".$k->unvan."</option>";
+                      }?>
+                  </select>
+              </div>
+
+              <div class="mb-3">
+                <select class="form-control select2" name="kod">
                     <option value="">Atık Kodu</option>
                     <?php foreach($kodlar as $k){
                         echo "<option value='".$k->id."'>".$k->kisa."</option>";
                     }?>
                 </select>
+              </div>
             <?php
 
                 echo form_input([

@@ -15,7 +15,7 @@ class AtikBildirimModel extends Model
     protected $returnType     = \App\Entities\Atik\AtikBildirimEntity::class;
     protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['atik_kod', 'aciklama', 'birim', 'miktar', 'notlar', 'dosya', 'ekleyen_id', 'guncelleyen_id'];
+    protected $allowedFields = ['atik_kod', 'yerlesim_id', 'aciklama', 'birim', 'miktar', 'notlar', 'dosya', 'ekleyen_id', 'guncelleyen_id'];
 
     protected $useTimestamps = false;
     protected $createdField  = 'ekleme_tarihi';
@@ -28,7 +28,6 @@ class AtikBildirimModel extends Model
 
     public function getall()
     {
-
         $builder = $this->builder($this->table);
         $builder = $builder->select("
             atik_kodlar.kod,
@@ -37,16 +36,31 @@ class AtikBildirimModel extends Model
             atik_bildirimler.miktar,
             atik_bildirimler.notlar,
             atik_bildirimler.dosya,
-            atik_bildirimler.id
+            atik_bildirimler.id,
+            yerlesimler.unvan
         ");
         $builder = $builder->join("birimler", "birimler.id=atik_bildirimler.birim");
         $builder = $builder->join("atik_kodlar", "atik_kodlar.id=atik_bildirimler.atik_kod");
+        $builder = $builder->join("yerlesimler", "yerlesimler.id=atik_bildirimler.yerlesim_id");
         if($this->tempUseSoftDeletes){
             $builder->where($this->table . '.' . $this->deletedField, null);
         }
         $builder = $builder->get();
         return $builder->getResult();
-
     }
 
+    public function getInSevkiyat()
+    {
+        $builder = $this->builder($this->table);
+        $builder = $builder->select("
+            atik_bildirimler.id,
+            yerlesimler.unvan
+        ");
+        $builder = $builder->join("yerlesimler", "yerlesimler.id=atik_bildirimler.yerlesim_id");
+        if($this->tempUseSoftDeletes){
+            $builder->where($this->table . '.' . $this->deletedField, null);
+        }
+        $builder = $builder->get();
+        return $builder->getResult();
+    }
 }

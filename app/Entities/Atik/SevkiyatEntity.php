@@ -7,6 +7,7 @@ use CodeIgniter\Entity\Entity;
 class SevkiyatEntity extends Entity {
 
 	protected $id;
+    protected $bildirim_id;
 	protected $atik_kod;
 	protected $tarih;
 	protected $miktar;
